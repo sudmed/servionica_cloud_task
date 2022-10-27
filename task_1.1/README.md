@@ -13,7 +13,6 @@ user(uid=1000)
 ```
 #### add public key
 copy `id_ed25519.pub` from host to box  
-`cat ~/.ssh/id_ed25519.pub `  
 `mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys`  
 `cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys`  
 
