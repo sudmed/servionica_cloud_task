@@ -38,11 +38,11 @@ pip 22.3 from /usr/local/lib/python3.9/site-packages/pip (python 3.9)
 `/usr/local/bin/python3.9 -m pip install --upgrade pip`  
 
 
-## 3. Python utility
+## 3. Python utility file
 [storage.py](storage.py)
 
 
-## 4. Python utility
+## 4. Storage data file
 [storage.data](storage.data)
 
 
