@@ -1,8 +1,8 @@
-## Задание 1.1
+## TASK 1.1
 **[Task text](task_text_1.1.png)**
 
 
-## 1. Add user and ssh key
+### 1. Add user and ssh key
 #### add user
 `adduser user`  
 `passwd user`  
@@ -16,7 +16,7 @@ copy `id_ed25519.pub` from host to box
 `mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys`  
 `cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys`  
 
-## 2. Install Python 3.9.15
+### 2. Install Python 3.9.15
 `sudo yum -y install epel-release`  
 `sudo yum -y update`  
 `sudo yum groupinstall "Development Tools" -y`  
@@ -38,13 +38,13 @@ pip 22.3 from /usr/local/lib/python3.9/site-packages/pip (python 3.9)
 `/usr/local/bin/python3.9 -m pip install --upgrade pip`  
 
 
-## 3. Python utility file
+### 3. Python utility file
 [storage.py](storage.py)
 
 
-## 4. Storage data file
+### 4. Storage data file
 [storage.data](storage.data)
 
 
-## 5. Utility Demo
+### 5. Utility Demo
 ![task-text](task_1.1.png)  
