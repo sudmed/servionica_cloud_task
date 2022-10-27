@@ -1,5 +1,5 @@
 ## Задание 1.1
-![task-text](task_text_1.1.png)  
+[Task text](task_text_1.1.png)  
 
 
 ## 1. Add user and ssh key
