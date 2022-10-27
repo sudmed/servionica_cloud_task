@@ -38,5 +38,5 @@ pip 22.3 from /usr/local/lib/python3.9/site-packages/pip (python 3.9)
 `/usr/local/bin/python3.9 -m pip install --upgrade pip`  
 
 
-## Демонстрация работы утилиты
+## 3. Демонстрация работы утилиты
 ![task-text](task_1.1.png)  
