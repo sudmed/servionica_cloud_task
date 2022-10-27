@@ -39,11 +39,11 @@ pip 22.3 from /usr/local/lib/python3.9/site-packages/pip (python 3.9)
 
 
 ### 3. Python utility file
-[storage.py](storage.py)
+**[storage.py](storage.py)**
 
 
 ### 4. Storage data file
-[storage.data](storage.data)
+**[storage.data](storage.data)**
 
 
 ### 5. Utility Demo
