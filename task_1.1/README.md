@@ -2,7 +2,7 @@
 ![task-text](task_text_1.1.png)  
 
 
-## Конфигурирование виртуалки
+## 1. Add user and ssh key
 #### add user
 `adduser user`  
 `passwd user`  
@@ -16,7 +16,7 @@ copy `id_ed25519.pub` from host to box
 `mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys`  
 `cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys`  
 
-#### install Python 3.9.15
+## 2. Install Python 3.9.15
 `sudo yum -y install epel-release`  
 `sudo yum -y update`  
 `sudo yum groupinstall "Development Tools" -y`  
