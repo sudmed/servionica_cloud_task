@@ -10,7 +10,7 @@
 - Keepalived floating (virtual) IP: 192.168.57.10  
 
 
-## First way: Bash scripts
+# First way: Bash scripts
 1. **[Install NGINX](install_nginx.sh)**
 2. **[Install HAproxy and Keepalived](install_haproxy_keepalived.sh)**
 
