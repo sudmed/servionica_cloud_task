@@ -1,15 +1,10 @@
 #!/bin/bash
 
 # This script installs HAproxy and Keepalived (in master or backup state).
-#
-# The node's IP-address must be given as command-line argument `-ip` (e.g. -ip=192.168.57.6).
-# The Keepalived state must be given as as command-line argument `-ke_st` (e.g. -ke_st=master OR -ke_st=backup).
-# The Keepalived Floating (virtual) IP must be given as command-line argument `-ke_vip` (e.g. -ke_vip=192.168.57.10).
-#
-# Usage: sudo ./install_haproxy_keepalived.sh -ip -ke_st -ke_vip
-
+# It needs 5 mandatory arguments.
 
 set -e
+passwd=$(openssl rand -base64 14)
 
 # check for root
 if [[ "$(id -u)" != "0" ]]; then
@@ -17,51 +12,65 @@ if [[ "$(id -u)" != "0" ]]; then
   exit 1
 fi
 
-
-### 0. Parse positional arguments
-if [ $# -eq 0 ]
-then
-  echo
+### 0. Validate and parse positional arguments
+if [ $# -eq 0 ]; then
+  echo ""
   echo "This script installs HAproxy and Keepalived (in master or backup state)."
-  echo "It needs 3 mandatory arguments: "
-  echo "      1) IP-address of VM (`-ip=` option),"
-  echo "      2) master or backup state of Keepalived (`-ke_st=` option),"
-  echo "      3) Keepalived's floating IP (`-ke_vip=` option)."
-  echo
-  echo "Usage: sudo ./install_haproxy_keepalived.sh -ip -ke_st -ke_vip"
+  echo ""
+  echo "You need to set 5 mandatory arguments: "
+  echo "      1) IP-address of VM (\"-n, --node-ip\" option)."
+  echo "      2) master or backup state of Keepalived (\"-s, --keepalived-state\" option)."
+  echo "      3) Keepalived's floating IP (\"-v, --keepalived-vip\" option)."
+  echo "      4) IP-address of webserver1 (\"-w1, --webserver1\" option)."
+  echo "      5) IP-address of webserver2 (\"-w2, --webserver2\" option)."
+  echo ""
+  echo "Usage: sudo $0 -n=<IP> -s=<master|backup> -v=<IP> -w1=<IP> -w2=<IP>"
   echo "Example:"
-  echo "    sudo ./install_haproxy_keepalived.sh -ip=192.168.57.6 -ke_st=master -ke_vip=192.168.57.10"
+  echo "    sudo $0 -n=192.168.57.6 -s=master -v=192.168.57.10 -w1=192.168.57.4 -w2=192.168.57.5"
+  echo ""
   exit 1
 fi
 
+if [ -z $2 ] || [ -z $3 ] || [ -z $4 ] || [ -z $5 ] || [ ! -z $6 ]; then
+  echo "You need to set exactly 5 parameters."
+  exit 1
+fi
 
 for i in "$@"; do
   case $i in
-    -ip=*|--node_ip=*)
+    -n=*|--node-ip=*)
       IP="${i#*=}"
-      shift # past argument=value
+      echo "IP=${i#*=}"
+      shift
       ;;
-    -ke_st=*|--keepalived_state=*)
-      KE_STATE="${i#*=}"
-      shift # past argument=value
+    -s=*|--keepalived-state=*)
+      STATE="${i#*=}"
+      echo "STATE="${i#*=}""
+      shift
       ;;
-    -ke_vip=*|--keepalived_vip=*)
-      KE_VIP="${i#*=}"
-      shift # past argument=value
+    -v=*|--keepalived-vip=*)
+      VIP="${i#*=}"
+      echo "VIP="${i#*=}""
+      shift
       ;;
-    --default)
-      DEFAULT=YES
-      shift # past argument with no value
+    -w1=*|--webserver1=*)
+      WS1="${i#*=}"
+      echo "WS1="${i#*=}""
+      shift
+      ;;
+    -w2=*|--webserver2=*)
+      WS2="${i#*=}"
+      echo "WS2="${i#*=}""
+      shift
       ;;
     -*|--*)
-      echo "Unknown option $i"
+      echo "Unknown option, try again."
       exit 1
       ;;
     *)
       ;;
   esac
 done
-
 
 ### 1. HAproxy
 
@@ -116,8 +125,8 @@ backend http_back
 balance roundrobin
 #balance leastconn
 mode http
-server webserver1 192.168.57.4:80 check
-server webserver2 192.168.57.5:80 check
+server webserver1 $WS1:80 check
+server webserver2 $WS2:80 check
 EOF
 
 ## restart haproxy
@@ -133,8 +142,6 @@ firewall-cmd --reload
 systemctl status haproxy
 haproxy -v
 
-
-
 ### 2. Keepalived
 
 ## install prerequisites
@@ -149,8 +156,10 @@ cd keepalived-2.2.7
 ./configure --prefix=/usr/local/keepalived --sysconf=/etc
 make && make install
 touch /etc/keepalived/keepalived.conf
-# SLAVE node @ 192.168.57.6/24
-cat > /etc/keepalived/keepalived.conf << EOF
+
+# MASTER mode
+if [ $STATE -eq master ]; then
+  cat > /etc/keepalived/keepalived.conf << EOF
 vrrp_instance VI_1 {
     state MASTER
     interface enp0s8
@@ -159,13 +168,34 @@ vrrp_instance VI_1 {
     advert_int 1
     authentication {
         auth_type PASS
-        auth_pass passw123
+        auth_pass $passwd
     }
     virtual_ipaddress {
-    192.168.57.10 # virtual IP
+    $VIP # virtual IP
     }
 }
 EOF
+fi
+
+# BACKUP mode
+if [ $STATE -eq backup ]; then
+  cat > /etc/keepalived/keepalived.conf << EOF
+vrrp_instance VI_1 {
+    state MASTER
+    interface enp0s8
+    virtual_router_id 51
+    priority 100
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass passw123
+    }
+    virtual_ipaddress {
+    $VIP # virtual IP
+    }
+}
+EOF
+fi
 
 ## start & enable keepalived
 systemctl start keepalived.service
