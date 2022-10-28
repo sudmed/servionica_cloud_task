@@ -4,8 +4,8 @@
 # It needs 5 mandatory arguments.
 
 set -e
-passwd=$(openssl rand -base64 14)
-echo $passwd
+# passwd=$(openssl rand -base64 14)
+passwd="eyhZK+8TmdkWLH+SXuQ="
 
 # check for root
 if [[ "$(id -u)" != "0" ]]; then
