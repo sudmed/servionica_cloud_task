@@ -17,6 +17,7 @@ sudo chmod +x install_haproxy_keepalived.sh
 sudo ./install_nginx.sh -c="<H1>Hello World! <br /> Server 1</H1>"
 ```
 [STDOUT](VM-1_output.txt)  
+
 ---
 
 #### Validation: run NGINX installing script on VM-2
@@ -27,6 +28,7 @@ sudo chmod +x install_haproxy_keepalived.sh
 sudo ./install_nginx.sh -c="<H1>Hello World! <br /> Server 2</H1>"
 ```
 [STDOUT](VM-2_output.txt)  
+
 ---
 
 #### Validation: run HAproxy and Keepalived installing script on VM-3 (master node)
@@ -37,6 +39,7 @@ sudo chmod +x install_haproxy_keepalived.sh
 sudo ./install_haproxy_keepalived.sh -n=192.168.57.6 -s=master -v=192.168.57.10 -w1=192.168.57.4 -w2=192.168.57.5 -p="eyhZK+8TmdkWLH+SXuQ="
 ```
 [STDOUT](VM-3_output.txt)  
+
 ---
 
 #### Validation: run HAproxy and Keepalived installing script on VM-4 (backup node)
@@ -47,4 +50,3 @@ sudo chmod +x install_haproxy_keepalived.sh
 sudo ./install_haproxy_keepalived.sh -n=192.168.57.7 -s=backup -v=192.168.57.10 -w1=192.168.57.4 -w2=192.168.57.5 -p="eyhZK+8TmdkWLH+SXuQ="
 ```
 [STDOUT](VM-4_output.txt)  
----
