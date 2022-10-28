@@ -1,11 +1,10 @@
 #!/bin/bash
 
 # This script installs HAproxy and Keepalived (in master or backup state).
-# It needs 5 mandatory arguments.
+# It needs 6 mandatory arguments.
 
 set -e
 # passwd=$(openssl rand -base64 14)
-passwd="eyhZK+8TmdkWLH+SXuQ="
 
 # check for root
 if [[ "$(id -u)" != "0" ]]; then
@@ -18,22 +17,23 @@ if [ $# -eq 0 ]; then
   echo ""
   echo "This script installs HAproxy and Keepalived (in master or backup state)."
   echo ""
-  echo "You need to set 5 mandatory arguments: "
+  echo "You need to set 6 mandatory arguments: "
   echo "      1) IP-address of VM (\"-n, --node-ip\" option)."
   echo "      2) master or backup state of Keepalived (\"-s, --keepalived-state\" option)."
   echo "      3) Keepalived's floating IP (\"-v, --keepalived-vip\" option)."
   echo "      4) IP-address of webserver1 (\"-w1, --webserver1\" option)."
   echo "      5) IP-address of webserver2 (\"-w2, --webserver2\" option)."
+  echo "      6) Password for Keepalived's master-backup interconnection (\"-p, --password\" option)."
   echo ""
-  echo "Usage: sudo $0 -n=<IP> -s=<master|backup> -v=<IP> -w1=<IP> -w2=<IP>"
+  echo "Usage: sudo $0 -n=<IP> -s=<master|backup> -v=<IP> -w1=<IP> -w2=<IP> -p=<password>"
   echo "Example:"
-  echo "    sudo $0 -n=192.168.57.6 -s=master -v=192.168.57.10 -w1=192.168.57.4 -w2=192.168.57.5"
+  echo "    sudo $0 -n=192.168.57.6 -s=master -v=192.168.57.10 -w1=192.168.57.4 -w2=192.168.57.5 -p=pa$$word"
   echo ""
   exit 1
 fi
 
-if [ -z $2 ] || [ -z $3 ] || [ -z $4 ] || [ -z $5 ] || [ ! -z $6 ]; then
-  echo "You need to set exactly 5 parameters."
+if [ -z $2 ] || [ -z $3 ] || [ -z $4 ] || [ -z $5 ] || [ -z $6 ] || [ ! -z $7 ]; then
+  echo "You need to set exactly 6 parameters."
   exit 1
 fi
 
@@ -62,6 +62,11 @@ for i in "$@"; do
     -w2=*|--webserver2=*)
       WS2="${i#*=}"
       echo "WS2="${i#*=}""
+      shift
+      ;;
+    -p=*|--password=*)
+      PASSWD="${i#*=}"
+      echo "PASSWD="${i#*=}""
       shift
       ;;
     -*|--*)
@@ -169,7 +174,7 @@ vrrp_instance VI_1 {
     advert_int 1
     authentication {
         auth_type PASS
-        auth_pass $passwd
+        auth_pass $PASSWD
     }
     virtual_ipaddress {
     $VIP # virtual IP
@@ -189,7 +194,7 @@ vrrp_instance VI_1 {
     advert_int 1
     authentication {
         auth_type PASS
-        auth_pass $passwd
+        auth_pass $PASSWD
     }
     virtual_ipaddress {
     $VIP # virtual IP
