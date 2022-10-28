@@ -1,6 +1,14 @@
 ## TASK 2.1
-Task's text
+[Task text](task_text_2.1.png)
 
+
+## Task solution
+
+
+### 1. Sysadmin's way
+#### Bash scripts
+1. [Install NGINX](install_nginx.sh)
+2. [Install HAproxy and Keepalived](install_haproxy_keepalived.sh)
 
 ### 
 ```console
