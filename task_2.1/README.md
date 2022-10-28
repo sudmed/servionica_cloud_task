@@ -14,9 +14,10 @@
 1. **[Install NGINX](install_nginx.sh)**
 2. **[Install HAproxy and Keepalived](install_haproxy_keepalived.sh)**
 
-#### Validation of working balancer
+#### Validation of working balancer and keepalived router failover
 ![task_2.1.gif](task_2.1.gif)
 
+---
 
 #### Run NGINX installing script on VM-1
 ```console
