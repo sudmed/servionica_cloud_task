@@ -21,7 +21,7 @@ if [ $# -eq 0 ]; then
   echo ""
   echo "Usage: sudo $0 -c=<"Hello World! Server 1">"
   echo "Example:"
-  echo "    sudo $0 -c="\<H1\>Hello World\! \<br \/\> Server 1\</H1\>" "
+  echo "    sudo $0 -c="\<H1\>Hello World! \<br \/\> Server 1\</H1\>" "
   echo ""
   exit 1
 fi
