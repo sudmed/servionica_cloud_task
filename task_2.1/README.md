@@ -3,6 +3,11 @@
 
 
 ### Task solution
+- VM-1 (192.168.57.4): NGINX webserver # 1  
+- VM-2 (192.168.57.5): NGINX webserver # 2  
+- VM-3 (192.168.57.6): HAproxy and Keepalived server # 1 (master node)  
+- VM-4 (192.168.57.7): HAproxy and Keepalived server # 2 (backup node)  
+- Keepalived floating (virtual) IP: 192.168.57.10  
 
 
 ## First way: Bash scripts
