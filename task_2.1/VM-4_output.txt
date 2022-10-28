@@ -1,0 +1,2918 @@
+### VM-4 OUTPUT (KEEPALIVED BACKUP)
+
+$ wget -N https://raw.githubusercontent.com/sudmed/servionica_cloud_task/main/task_2.1/install_haproxy_keepalived.sh
+--2022-10-28 18:44:31--  https://raw.githubusercontent.com/sudmed/servionica_cloud_task/main/task_2.1/install_haproxy_keepalived.sh
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.111.133, 185.199.109.133, 185.199.108.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.111.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4894 (4.8K) [text/plain]
+Saving to: ‘install_haproxy_keepalived.sh’
+
+100%[==================================================================================================================================================================>] 4,894       --.-K/s   in 0s
+
+Last-modified header missing -- time-stamps turned off.
+2022-10-28 18:44:31 (114 MB/s) - ‘install_haproxy_keepalived.sh’ saved [4894/4894]
+
+$ sudo chmod +x install_haproxy_keepalived.sh
+[sudo] password for user:
+$ sudo ./install_haproxy_keepalived.sh
+
+This script installs HAproxy and Keepalived (in master or backup state).
+
+You need to set 6 mandatory arguments:
+      1) IP-address of VM ("-n, --node-ip" option).
+      2) master or backup state of Keepalived ("-s, --keepalived-state" option).
+      3) Keepalived's floating IP ("-v, --keepalived-vip" option).
+      4) IP-address of webserver1 ("-w1, --webserver1" option).
+      5) IP-address of webserver2 ("-w2, --webserver2" option).
+      6) Password for Keepalived's master-backup interconnection ("-p, --password" option).
+
+Usage: sudo ./install_haproxy_keepalived.sh -n=<IP> -s=<master|backup> -v=<IP> -w1=<IP> -w2=<IP> -p=<password>
+Example:
+    sudo ./install_haproxy_keepalived.sh -n=192.168.57.6 -s=master -v=192.168.57.10 -w1=192.168.57.4 -w2=192.168.57.5 -p=pa1714word
+
+$ sudo ./install_haproxy_keepalived.sh -n=192.168.57.7 -s=backup -v=192.168.57.10 -w1=192.168.57.4 -w2=192.168.57.5 -p="eyhZK+8TmdkWLH+SXuQ="
+IP=192.168.57.7
+STATE=backup
+VIP=192.168.57.10
+WS1=192.168.57.4
+WS2=192.168.57.5
+PASSWD=eyhZK+8TmdkWLH+SXuQ=
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+epel/x86_64/metalink                                                                                                                                                                 |  13 kB  00:00:00
+ * base: mirror.docker.ru
+ * epel: mirror.yandex.ru
+ * extras: mirror.docker.ru
+ * updates: mirror.docker.ru
+base                                                                                                                                                                                 | 3.6 kB  00:00:00
+epel                                                                                                                                                                                 | 4.7 kB  00:00:00
+extras                                                                                                                                                                               | 2.9 kB  00:00:00
+updates                                                                                                                                                                              | 2.9 kB  00:00:00
+(1/2): epel/x86_64/updateinfo                                                                                                                                                        | 1.0 MB  00:00:00
+(2/2): epel/x86_64/primary_db                                                                                                                                                        | 7.0 MB  00:00:04
+No packages marked for update
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.docker.ru
+ * epel: mirror.yandex.ru
+ * extras: mirror.docker.ru
+ * updates: mirror.docker.ru
+Package gcc-4.8.5-44.el7.x86_64 already installed and latest version
+Package pcre-devel-8.32-17.el7.x86_64 already installed and latest version
+Package 2:tar-1.26-35.el7.x86_64 already installed and latest version
+Package 1:make-3.82-24.el7.x86_64 already installed and latest version
+Nothing to do
+--2022-10-28 18:45:01--  http://www.haproxy.org/download/2.6/src/haproxy-2.6.6.tar.gz
+Resolving www.haproxy.org (www.haproxy.org)... 51.15.8.218, 2001:bc8:35ee:100::1
+Connecting to www.haproxy.org (www.haproxy.org)|51.15.8.218|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4015438 (3.8M) [application/x-tar]
+Saving to: ‘haproxy-2.6.6.tar.gz’
+
+100%[==================================================================================================================================================================>] 4,015,438   2.38MB/s   in 1.6s
+
+2022-10-28 18:45:02 (2.38 MB/s) - ‘haproxy-2.6.6.tar.gz’ saved [4015438/4015438]
+
+haproxy-2.6.6/
+haproxy-2.6.6/.cirrus.yml
+haproxy-2.6.6/.gitattributes
+haproxy-2.6.6/.github/
+haproxy-2.6.6/.github/ISSUE_TEMPLATE/
+haproxy-2.6.6/.github/ISSUE_TEMPLATE/Bug.yml
+haproxy-2.6.6/.github/ISSUE_TEMPLATE/Code-Report.yml
+haproxy-2.6.6/.github/ISSUE_TEMPLATE/Feature.yml
+haproxy-2.6.6/.github/ISSUE_TEMPLATE/config.yml
+haproxy-2.6.6/.github/errorfile
+haproxy-2.6.6/.github/h2spec.config
+haproxy-2.6.6/.github/matrix.py
+haproxy-2.6.6/.github/vtest.json
+haproxy-2.6.6/.github/workflows/
+haproxy-2.6.6/.github/workflows/codespell.yml
+haproxy-2.6.6/.github/workflows/compliance.yml
+haproxy-2.6.6/.github/workflows/contrib.yml
+haproxy-2.6.6/.github/workflows/coverity.yml
+haproxy-2.6.6/.github/workflows/musl.yml
+haproxy-2.6.6/.github/workflows/openssl-nodeprecated.yml
+haproxy-2.6.6/.github/workflows/vtest.yml
+haproxy-2.6.6/.github/workflows/windows.yml
+haproxy-2.6.6/.gitignore
+haproxy-2.6.6/.mailmap
+haproxy-2.6.6/.travis.yml
+haproxy-2.6.6/BRANCHES
+haproxy-2.6.6/CHANGELOG
+haproxy-2.6.6/CONTRIBUTING
+haproxy-2.6.6/INSTALL
+haproxy-2.6.6/LICENSE
+haproxy-2.6.6/MAINTAINERS
+haproxy-2.6.6/Makefile
+haproxy-2.6.6/README
+haproxy-2.6.6/SUBVERS
+haproxy-2.6.6/VERDATE
+haproxy-2.6.6/VERSION
+haproxy-2.6.6/addons/
+haproxy-2.6.6/addons/51degrees/
+haproxy-2.6.6/addons/51degrees/51d.c
+haproxy-2.6.6/addons/51degrees/dummy/
+haproxy-2.6.6/addons/51degrees/dummy/cityhash/
+haproxy-2.6.6/addons/51degrees/dummy/cityhash/city.c
+haproxy-2.6.6/addons/51degrees/dummy/pattern/
+haproxy-2.6.6/addons/51degrees/dummy/pattern/51Degrees.c
+haproxy-2.6.6/addons/51degrees/dummy/pattern/51Degrees.h
+haproxy-2.6.6/addons/51degrees/dummy/threading.c
+haproxy-2.6.6/addons/51degrees/dummy/trie/
+haproxy-2.6.6/addons/51degrees/dummy/trie/51Degrees.c
+haproxy-2.6.6/addons/51degrees/dummy/trie/51Degrees.h
+haproxy-2.6.6/addons/deviceatlas/
+haproxy-2.6.6/addons/deviceatlas/Makefile
+haproxy-2.6.6/addons/deviceatlas/da.c
+haproxy-2.6.6/addons/deviceatlas/dadwsch.c
+haproxy-2.6.6/addons/deviceatlas/dummy/
+haproxy-2.6.6/addons/deviceatlas/dummy/Makefile
+haproxy-2.6.6/addons/deviceatlas/dummy/Os/
+haproxy-2.6.6/addons/deviceatlas/dummy/Os/daunix.c
+haproxy-2.6.6/addons/deviceatlas/dummy/dac.c
+haproxy-2.6.6/addons/deviceatlas/dummy/dac.h
+haproxy-2.6.6/addons/deviceatlas/dummy/dadwcom.c
+haproxy-2.6.6/addons/deviceatlas/dummy/dasch.c
+haproxy-2.6.6/addons/deviceatlas/dummy/json.c
+haproxy-2.6.6/addons/ot/
+haproxy-2.6.6/addons/ot/AUTHORS
+haproxy-2.6.6/addons/ot/MAINTAINERS
+haproxy-2.6.6/addons/ot/Makefile
+haproxy-2.6.6/addons/ot/README
+haproxy-2.6.6/addons/ot/README-func
+haproxy-2.6.6/addons/ot/README-pool
+haproxy-2.6.6/addons/ot/include/
+haproxy-2.6.6/addons/ot/include/cli.h
+haproxy-2.6.6/addons/ot/include/conf.h
+haproxy-2.6.6/addons/ot/include/config.h
+haproxy-2.6.6/addons/ot/include/debug.h
+haproxy-2.6.6/addons/ot/include/define.h
+haproxy-2.6.6/addons/ot/include/event.h
+haproxy-2.6.6/addons/ot/include/filter.h
+haproxy-2.6.6/addons/ot/include/group.h
+haproxy-2.6.6/addons/ot/include/http.h
+haproxy-2.6.6/addons/ot/include/include.h
+haproxy-2.6.6/addons/ot/include/opentracing.h
+haproxy-2.6.6/addons/ot/include/parser.h
+haproxy-2.6.6/addons/ot/include/pool.h
+haproxy-2.6.6/addons/ot/include/scope.h
+haproxy-2.6.6/addons/ot/include/util.h
+haproxy-2.6.6/addons/ot/include/vars.h
+haproxy-2.6.6/addons/ot/src/
+haproxy-2.6.6/addons/ot/src/cli.c
+haproxy-2.6.6/addons/ot/src/conf.c
+haproxy-2.6.6/addons/ot/src/event.c
+haproxy-2.6.6/addons/ot/src/filter.c
+haproxy-2.6.6/addons/ot/src/group.c
+haproxy-2.6.6/addons/ot/src/http.c
+haproxy-2.6.6/addons/ot/src/opentracing.c
+haproxy-2.6.6/addons/ot/src/parser.c
+haproxy-2.6.6/addons/ot/src/pool.c
+haproxy-2.6.6/addons/ot/src/scope.c
+haproxy-2.6.6/addons/ot/src/util.c
+haproxy-2.6.6/addons/ot/src/vars.c
+haproxy-2.6.6/addons/ot/test/
+haproxy-2.6.6/addons/ot/test/README-speed-cmp
+haproxy-2.6.6/addons/ot/test/README-speed-ctx
+haproxy-2.6.6/addons/ot/test/README-speed-fe-be
+haproxy-2.6.6/addons/ot/test/README-speed-sa
+haproxy-2.6.6/addons/ot/test/be/
+haproxy-2.6.6/addons/ot/test/be/cfg-dd.json
+haproxy-2.6.6/addons/ot/test/be/cfg-jaeger.yml
+haproxy-2.6.6/addons/ot/test/be/cfg-zipkin.json
+haproxy-2.6.6/addons/ot/test/be/haproxy.cfg
+haproxy-2.6.6/addons/ot/test/be/ot.cfg
+haproxy-2.6.6/addons/ot/test/cmp/
+haproxy-2.6.6/addons/ot/test/cmp/cfg-dd.json
+haproxy-2.6.6/addons/ot/test/cmp/cfg-jaeger.yml
+haproxy-2.6.6/addons/ot/test/cmp/cfg-zipkin.json
+haproxy-2.6.6/addons/ot/test/cmp/haproxy.cfg
+haproxy-2.6.6/addons/ot/test/cmp/ot.cfg
+haproxy-2.6.6/addons/ot/test/ctx/
+haproxy-2.6.6/addons/ot/test/ctx/cfg-dd.json
+haproxy-2.6.6/addons/ot/test/ctx/cfg-jaeger.yml
+haproxy-2.6.6/addons/ot/test/ctx/cfg-zipkin.json
+haproxy-2.6.6/addons/ot/test/ctx/haproxy.cfg
+haproxy-2.6.6/addons/ot/test/ctx/ot.cfg
+haproxy-2.6.6/addons/ot/test/empty/
+haproxy-2.6.6/addons/ot/test/empty/cfg-dd.json
+haproxy-2.6.6/addons/ot/test/empty/cfg-jaeger.yml
+haproxy-2.6.6/addons/ot/test/empty/cfg-zipkin.json
+haproxy-2.6.6/addons/ot/test/empty/haproxy.cfg
+haproxy-2.6.6/addons/ot/test/empty/ot.cfg
+haproxy-2.6.6/addons/ot/test/fe/
+haproxy-2.6.6/addons/ot/test/fe/cfg-dd.json
+haproxy-2.6.6/addons/ot/test/fe/cfg-jaeger.yml
+haproxy-2.6.6/addons/ot/test/fe/cfg-zipkin.json
+haproxy-2.6.6/addons/ot/test/fe/haproxy.cfg
+haproxy-2.6.6/addons/ot/test/fe/ot.cfg
+haproxy-2.6.6/addons/ot/test/func-stat.sh
+haproxy-2.6.6/addons/ot/test/get-opentracing-plugins.sh
+haproxy-2.6.6/addons/ot/test/index.html
+haproxy-2.6.6/addons/ot/test/run-cmp.sh
+haproxy-2.6.6/addons/ot/test/run-ctx.sh
+haproxy-2.6.6/addons/ot/test/run-fe-be.sh
+haproxy-2.6.6/addons/ot/test/run-sa.sh
+haproxy-2.6.6/addons/ot/test/sa/
+haproxy-2.6.6/addons/ot/test/sa/cfg-dd.json
+haproxy-2.6.6/addons/ot/test/sa/cfg-jaeger.yml
+haproxy-2.6.6/addons/ot/test/sa/cfg-zipkin.json
+haproxy-2.6.6/addons/ot/test/sa/haproxy.cfg
+haproxy-2.6.6/addons/ot/test/sa/ot.cfg
+haproxy-2.6.6/addons/ot/test/test-speed.sh
+haproxy-2.6.6/addons/promex/
+haproxy-2.6.6/addons/promex/README
+haproxy-2.6.6/addons/promex/service-prometheus.c
+haproxy-2.6.6/addons/wurfl/
+haproxy-2.6.6/addons/wurfl/dummy/
+haproxy-2.6.6/addons/wurfl/dummy/Makefile
+haproxy-2.6.6/addons/wurfl/dummy/dummy-wurfl.c
+haproxy-2.6.6/addons/wurfl/dummy/wurfl/
+haproxy-2.6.6/addons/wurfl/dummy/wurfl/wurfl.h
+haproxy-2.6.6/addons/wurfl/wurfl.c
+haproxy-2.6.6/admin/
+haproxy-2.6.6/admin/dyncookie/
+haproxy-2.6.6/admin/dyncookie/dyncookie.c
+haproxy-2.6.6/admin/halog/
+haproxy-2.6.6/admin/halog/README
+haproxy-2.6.6/admin/halog/fgets2.c
+haproxy-2.6.6/admin/halog/halog.c
+haproxy-2.6.6/admin/iprange/
+haproxy-2.6.6/admin/iprange/Makefile
+haproxy-2.6.6/admin/iprange/ip6range.c
+haproxy-2.6.6/admin/iprange/iprange.c
+haproxy-2.6.6/admin/netsnmp-perl/
+haproxy-2.6.6/admin/netsnmp-perl/README
+haproxy-2.6.6/admin/netsnmp-perl/cacti_data_query_haproxy_backends.xml
+haproxy-2.6.6/admin/netsnmp-perl/cacti_data_query_haproxy_frontends.xml
+haproxy-2.6.6/admin/netsnmp-perl/haproxy.pl
+haproxy-2.6.6/admin/netsnmp-perl/haproxy_backend.xml
+haproxy-2.6.6/admin/netsnmp-perl/haproxy_frontend.xml
+haproxy-2.6.6/admin/netsnmp-perl/haproxy_socket.xml
+haproxy-2.6.6/admin/release-estimator/
+haproxy-2.6.6/admin/release-estimator/README.md
+haproxy-2.6.6/admin/release-estimator/release-estimator.py
+haproxy-2.6.6/admin/selinux/
+haproxy-2.6.6/admin/selinux/README
+haproxy-2.6.6/admin/selinux/haproxy.fc
+haproxy-2.6.6/admin/selinux/haproxy.if
+haproxy-2.6.6/admin/selinux/haproxy.te
+haproxy-2.6.6/admin/syntax-highlight/
+haproxy-2.6.6/admin/syntax-highlight/haproxy.vim
+haproxy-2.6.6/admin/systemd/
+haproxy-2.6.6/admin/systemd/Makefile
+haproxy-2.6.6/admin/systemd/haproxy.service.in
+haproxy-2.6.6/admin/wireshark-dissectors/
+haproxy-2.6.6/admin/wireshark-dissectors/peers/
+haproxy-2.6.6/admin/wireshark-dissectors/peers/Makefile
+haproxy-2.6.6/admin/wireshark-dissectors/peers/README
+haproxy-2.6.6/admin/wireshark-dissectors/peers/packet-happp.c
+haproxy-2.6.6/admin/wireshark-dissectors/peers/wireshark.happp.dissector.patch
+haproxy-2.6.6/dev/
+haproxy-2.6.6/dev/base64/
+haproxy-2.6.6/dev/base64/base64rev-gen.c
+haproxy-2.6.6/dev/coccinelle/
+haproxy-2.6.6/dev/coccinelle/bug_on.cocci
+haproxy-2.6.6/dev/coccinelle/cs_endp_flags.cocci
+haproxy-2.6.6/dev/coccinelle/endp_flags.cocci
+haproxy-2.6.6/dev/coccinelle/ha_free.cocci
+haproxy-2.6.6/dev/coccinelle/ist.cocci
+haproxy-2.6.6/dev/coccinelle/realloc_leak.cocci
+haproxy-2.6.6/dev/coccinelle/strcmp.cocci
+haproxy-2.6.6/dev/coccinelle/xalloc_cast.cocci
+haproxy-2.6.6/dev/coccinelle/xalloc_size.cocci
+haproxy-2.6.6/dev/flags/
+haproxy-2.6.6/dev/flags/README
+haproxy-2.6.6/dev/flags/flags.c
+haproxy-2.6.6/dev/flags/show-fd-to-flags.sh
+haproxy-2.6.6/dev/haring/
+haproxy-2.6.6/dev/haring/README
+haproxy-2.6.6/dev/haring/haring.c
+haproxy-2.6.6/dev/hpack/
+haproxy-2.6.6/dev/hpack/README
+haproxy-2.6.6/dev/hpack/decode.c
+haproxy-2.6.6/dev/hpack/gen-enc.c
+haproxy-2.6.6/dev/hpack/gen-rht.c
+haproxy-2.6.6/dev/plug_qdisc/
+haproxy-2.6.6/dev/plug_qdisc/README
+haproxy-2.6.6/dev/plug_qdisc/plug_qdisc.c
+haproxy-2.6.6/dev/poll/
+haproxy-2.6.6/dev/poll/Makefile
+haproxy-2.6.6/dev/poll/poll.c
+haproxy-2.6.6/dev/tcploop/
+haproxy-2.6.6/dev/tcploop/Makefile
+haproxy-2.6.6/dev/tcploop/tcploop.c
+haproxy-2.6.6/dev/trace/
+haproxy-2.6.6/dev/trace/trace.awk
+haproxy-2.6.6/dev/udp/
+haproxy-2.6.6/dev/udp/udp-perturb.c
+haproxy-2.6.6/doc/
+haproxy-2.6.6/doc/51Degrees-device-detection.txt
+haproxy-2.6.6/doc/DeviceAtlas-device-detection.txt
+haproxy-2.6.6/doc/SOCKS4.protocol.txt
+haproxy-2.6.6/doc/SPOE.txt
+haproxy-2.6.6/doc/WURFL-device-detection.txt
+haproxy-2.6.6/doc/acl.fig
+haproxy-2.6.6/doc/architecture.txt
+haproxy-2.6.6/doc/close-options.txt
+haproxy-2.6.6/doc/coding-style.txt
+haproxy-2.6.6/doc/configuration.txt
+haproxy-2.6.6/doc/cookie-options.txt
+haproxy-2.6.6/doc/design-thoughts/
+haproxy-2.6.6/doc/design-thoughts/backends-v0.txt
+haproxy-2.6.6/doc/design-thoughts/backends.txt
+haproxy-2.6.6/doc/design-thoughts/be-fe-changes.txt
+haproxy-2.6.6/doc/design-thoughts/binding-possibilities.txt
+haproxy-2.6.6/doc/design-thoughts/config-language.txt
+haproxy-2.6.6/doc/design-thoughts/connection-reuse.txt
+haproxy-2.6.6/doc/design-thoughts/connection-sharing.txt
+haproxy-2.6.6/doc/design-thoughts/dynamic-buffers.txt
+haproxy-2.6.6/doc/design-thoughts/entities-v2.txt
+haproxy-2.6.6/doc/design-thoughts/how-it-works.txt
+haproxy-2.6.6/doc/design-thoughts/http2.txt
+haproxy-2.6.6/doc/design-thoughts/http_load_time.url
+haproxy-2.6.6/doc/design-thoughts/pool-debugging.txt
+haproxy-2.6.6/doc/design-thoughts/rate-shaping.txt
+haproxy-2.6.6/doc/design-thoughts/sess_par_sec.txt
+haproxy-2.6.6/doc/design-thoughts/thread-group.txt
+haproxy-2.6.6/doc/gpl.txt
+haproxy-2.6.6/doc/haproxy.1
+haproxy-2.6.6/doc/internals/
+haproxy-2.6.6/doc/internals/acl.txt
+haproxy-2.6.6/doc/internals/api/
+haproxy-2.6.6/doc/internals/api/appctx.txt
+haproxy-2.6.6/doc/internals/api/buffer-api.txt
+haproxy-2.6.6/doc/internals/api/filters.txt
+haproxy-2.6.6/doc/internals/api/htx-api.txt
+haproxy-2.6.6/doc/internals/api/initcalls.txt
+haproxy-2.6.6/doc/internals/api/ist.txt
+haproxy-2.6.6/doc/internals/api/layers.txt
+haproxy-2.6.6/doc/internals/api/list.txt
+haproxy-2.6.6/doc/internals/api/pools.txt
+haproxy-2.6.6/doc/internals/api/scheduler.txt
+haproxy-2.6.6/doc/internals/body-parsing.txt
+haproxy-2.6.6/doc/internals/connect-status.txt
+haproxy-2.6.6/doc/internals/connection-header.txt
+haproxy-2.6.6/doc/internals/connection-scale.txt
+haproxy-2.6.6/doc/internals/entities-v2.txt
+haproxy-2.6.6/doc/internals/entities.txt
+haproxy-2.6.6/doc/internals/fd-migration.txt
+haproxy-2.6.6/doc/internals/hashing.txt
+haproxy-2.6.6/doc/internals/header-parser-speed.txt
+haproxy-2.6.6/doc/internals/header-tree.txt
+haproxy-2.6.6/doc/internals/http-cookies.txt
+haproxy-2.6.6/doc/internals/http-docs.txt
+haproxy-2.6.6/doc/internals/http-parsing.txt
+haproxy-2.6.6/doc/internals/list.fig
+haproxy-2.6.6/doc/internals/list.png
+haproxy-2.6.6/doc/internals/listener-states.fig
+haproxy-2.6.6/doc/internals/listener-states.png
+haproxy-2.6.6/doc/internals/lua_socket.fig
+haproxy-2.6.6/doc/internals/lua_socket.pdf
+haproxy-2.6.6/doc/internals/muxes.fig
+haproxy-2.6.6/doc/internals/muxes.pdf
+haproxy-2.6.6/doc/internals/muxes.png
+haproxy-2.6.6/doc/internals/muxes.svg
+haproxy-2.6.6/doc/internals/naming.txt
+haproxy-2.6.6/doc/internals/notes-layers.txt
+haproxy-2.6.6/doc/internals/pattern.dia
+haproxy-2.6.6/doc/internals/pattern.pdf
+haproxy-2.6.6/doc/internals/polling-states.fig
+haproxy-2.6.6/doc/internals/repartition-be-fe-fi.txt
+haproxy-2.6.6/doc/internals/sched.fig
+haproxy-2.6.6/doc/internals/sched.pdf
+haproxy-2.6.6/doc/internals/sched.png
+haproxy-2.6.6/doc/internals/sched.svg
+haproxy-2.6.6/doc/internals/ssl_cert.dia
+haproxy-2.6.6/doc/internals/stats-v2.txt
+haproxy-2.6.6/doc/internals/stream-sock-states.fig
+haproxy-2.6.6/doc/intro.txt
+haproxy-2.6.6/doc/lgpl.txt
+haproxy-2.6.6/doc/linux-syn-cookies.txt
+haproxy-2.6.6/doc/lua-api/
+haproxy-2.6.6/doc/lua-api/Makefile
+haproxy-2.6.6/doc/lua-api/_static/
+haproxy-2.6.6/doc/lua-api/_static/channel.fig
+haproxy-2.6.6/doc/lua-api/_static/channel.png
+haproxy-2.6.6/doc/lua-api/conf.py
+haproxy-2.6.6/doc/lua-api/index.rst
+haproxy-2.6.6/doc/lua.txt
+haproxy-2.6.6/doc/management.txt
+haproxy-2.6.6/doc/netscaler-client-ip-insertion-protocol.txt
+haproxy-2.6.6/doc/network-namespaces.txt
+haproxy-2.6.6/doc/peers-v2.0.txt
+haproxy-2.6.6/doc/peers.txt
+haproxy-2.6.6/doc/proxy-protocol.txt
+haproxy-2.6.6/doc/queuing.fig
+haproxy-2.6.6/doc/regression-testing.txt
+haproxy-2.6.6/doc/seamless_reload.txt
+haproxy-2.6.6/examples/
+haproxy-2.6.6/examples/basic-config-edge.cfg
+haproxy-2.6.6/examples/content-sw-sample.cfg
+haproxy-2.6.6/examples/errorfiles/
+haproxy-2.6.6/examples/errorfiles/400.http
+haproxy-2.6.6/examples/errorfiles/403.http
+haproxy-2.6.6/examples/errorfiles/408.http
+haproxy-2.6.6/examples/errorfiles/500.http
+haproxy-2.6.6/examples/errorfiles/502.http
+haproxy-2.6.6/examples/errorfiles/503.http
+haproxy-2.6.6/examples/errorfiles/504.http
+haproxy-2.6.6/examples/errorfiles/README
+haproxy-2.6.6/examples/haproxy.init
+haproxy-2.6.6/examples/option-http_proxy.cfg
+haproxy-2.6.6/examples/quick-test.cfg
+haproxy-2.6.6/examples/socks4.cfg
+haproxy-2.6.6/examples/transparent_proxy.cfg
+haproxy-2.6.6/examples/wurfl-example.cfg
+haproxy-2.6.6/include/
+haproxy-2.6.6/include/haproxy/
+haproxy-2.6.6/include/haproxy/acl-t.h
+haproxy-2.6.6/include/haproxy/acl.h
+haproxy-2.6.6/include/haproxy/action-t.h
+haproxy-2.6.6/include/haproxy/action.h
+haproxy-2.6.6/include/haproxy/activity-t.h
+haproxy-2.6.6/include/haproxy/activity.h
+haproxy-2.6.6/include/haproxy/api-t.h
+haproxy-2.6.6/include/haproxy/api.h
+haproxy-2.6.6/include/haproxy/applet-t.h
+haproxy-2.6.6/include/haproxy/applet.h
+haproxy-2.6.6/include/haproxy/arg-t.h
+haproxy-2.6.6/include/haproxy/arg.h
+haproxy-2.6.6/include/haproxy/atomic.h
+haproxy-2.6.6/include/haproxy/auth-t.h
+haproxy-2.6.6/include/haproxy/auth.h
+haproxy-2.6.6/include/haproxy/backend-t.h
+haproxy-2.6.6/include/haproxy/backend.h
+haproxy-2.6.6/include/haproxy/base64.h
+haproxy-2.6.6/include/haproxy/buf-t.h
+haproxy-2.6.6/include/haproxy/buf.h
+haproxy-2.6.6/include/haproxy/bug.h
+haproxy-2.6.6/include/haproxy/capture-t.h
+haproxy-2.6.6/include/haproxy/capture.h
+haproxy-2.6.6/include/haproxy/cbuf-t.h
+haproxy-2.6.6/include/haproxy/cbuf.h
+haproxy-2.6.6/include/haproxy/cfgcond-t.h
+haproxy-2.6.6/include/haproxy/cfgcond.h
+haproxy-2.6.6/include/haproxy/cfgdiag.h
+haproxy-2.6.6/include/haproxy/cfgparse.h
+haproxy-2.6.6/include/haproxy/channel-t.h
+haproxy-2.6.6/include/haproxy/channel.h
+haproxy-2.6.6/include/haproxy/check-t.h
+haproxy-2.6.6/include/haproxy/check.h
+haproxy-2.6.6/include/haproxy/chunk.h
+haproxy-2.6.6/include/haproxy/cli-t.h
+haproxy-2.6.6/include/haproxy/cli.h
+haproxy-2.6.6/include/haproxy/clock.h
+haproxy-2.6.6/include/haproxy/compat.h
+haproxy-2.6.6/include/haproxy/compiler.h
+haproxy-2.6.6/include/haproxy/compression-t.h
+haproxy-2.6.6/include/haproxy/compression.h
+haproxy-2.6.6/include/haproxy/connection-t.h
+haproxy-2.6.6/include/haproxy/connection.h
+haproxy-2.6.6/include/haproxy/counters-t.h
+haproxy-2.6.6/include/haproxy/cpuset-t.h
+haproxy-2.6.6/include/haproxy/cpuset.h
+haproxy-2.6.6/include/haproxy/debug.h
+haproxy-2.6.6/include/haproxy/defaults.h
+haproxy-2.6.6/include/haproxy/dgram-t.h
+haproxy-2.6.6/include/haproxy/dgram.h
+haproxy-2.6.6/include/haproxy/dict-t.h
+haproxy-2.6.6/include/haproxy/dict.h
+haproxy-2.6.6/include/haproxy/dns-t.h
+haproxy-2.6.6/include/haproxy/dns.h
+haproxy-2.6.6/include/haproxy/dynbuf-t.h
+haproxy-2.6.6/include/haproxy/dynbuf.h
+haproxy-2.6.6/include/haproxy/errors.h
+haproxy-2.6.6/include/haproxy/extcheck.h
+haproxy-2.6.6/include/haproxy/fcgi-app-t.h
+haproxy-2.6.6/include/haproxy/fcgi-app.h
+haproxy-2.6.6/include/haproxy/fcgi.h
+haproxy-2.6.6/include/haproxy/fd-t.h
+haproxy-2.6.6/include/haproxy/fd.h
+haproxy-2.6.6/include/haproxy/filters-t.h
+haproxy-2.6.6/include/haproxy/filters.h
+haproxy-2.6.6/include/haproxy/fix-t.h
+haproxy-2.6.6/include/haproxy/fix.h
+haproxy-2.6.6/include/haproxy/flt_http_comp.h
+haproxy-2.6.6/include/haproxy/freq_ctr-t.h
+haproxy-2.6.6/include/haproxy/freq_ctr.h
+haproxy-2.6.6/include/haproxy/frontend.h
+haproxy-2.6.6/include/haproxy/global-t.h
+haproxy-2.6.6/include/haproxy/global.h
+haproxy-2.6.6/include/haproxy/h1.h
+haproxy-2.6.6/include/haproxy/h1_htx.h
+haproxy-2.6.6/include/haproxy/h2.h
+haproxy-2.6.6/include/haproxy/h3.h
+haproxy-2.6.6/include/haproxy/h3_stats-t.h
+haproxy-2.6.6/include/haproxy/h3_stats.h
+haproxy-2.6.6/include/haproxy/hash.h
+haproxy-2.6.6/include/haproxy/hlua-t.h
+haproxy-2.6.6/include/haproxy/hlua.h
+haproxy-2.6.6/include/haproxy/hlua_fcn.h
+haproxy-2.6.6/include/haproxy/hpack-dec.h
+haproxy-2.6.6/include/haproxy/hpack-enc.h
+haproxy-2.6.6/include/haproxy/hpack-huff.h
+haproxy-2.6.6/include/haproxy/hpack-tbl-t.h
+haproxy-2.6.6/include/haproxy/hpack-tbl.h
+haproxy-2.6.6/include/haproxy/hq_interop.h
+haproxy-2.6.6/include/haproxy/http-hdr-t.h
+haproxy-2.6.6/include/haproxy/http-hdr.h
+haproxy-2.6.6/include/haproxy/http-t.h
+haproxy-2.6.6/include/haproxy/http.h
+haproxy-2.6.6/include/haproxy/http_ana-t.h
+haproxy-2.6.6/include/haproxy/http_ana.h
+haproxy-2.6.6/include/haproxy/http_client-t.h
+haproxy-2.6.6/include/haproxy/http_client.h
+haproxy-2.6.6/include/haproxy/http_fetch.h
+haproxy-2.6.6/include/haproxy/http_htx-t.h
+haproxy-2.6.6/include/haproxy/http_htx.h
+haproxy-2.6.6/include/haproxy/http_rules.h
+haproxy-2.6.6/include/haproxy/htx-t.h
+haproxy-2.6.6/include/haproxy/htx.h
+haproxy-2.6.6/include/haproxy/init-t.h
+haproxy-2.6.6/include/haproxy/init.h
+haproxy-2.6.6/include/haproxy/initcall.h
+haproxy-2.6.6/include/haproxy/intops.h
+haproxy-2.6.6/include/haproxy/istbuf.h
+haproxy-2.6.6/include/haproxy/jwt-t.h
+haproxy-2.6.6/include/haproxy/jwt.h
+haproxy-2.6.6/include/haproxy/lb_chash-t.h
+haproxy-2.6.6/include/haproxy/lb_chash.h
+haproxy-2.6.6/include/haproxy/lb_fas-t.h
+haproxy-2.6.6/include/haproxy/lb_fas.h
+haproxy-2.6.6/include/haproxy/lb_fwlc-t.h
+haproxy-2.6.6/include/haproxy/lb_fwlc.h
+haproxy-2.6.6/include/haproxy/lb_fwrr-t.h
+haproxy-2.6.6/include/haproxy/lb_fwrr.h
+haproxy-2.6.6/include/haproxy/lb_map-t.h
+haproxy-2.6.6/include/haproxy/lb_map.h
+haproxy-2.6.6/include/haproxy/list-t.h
+haproxy-2.6.6/include/haproxy/list.h
+haproxy-2.6.6/include/haproxy/listener-t.h
+haproxy-2.6.6/include/haproxy/listener.h
+haproxy-2.6.6/include/haproxy/log-t.h
+haproxy-2.6.6/include/haproxy/log.h
+haproxy-2.6.6/include/haproxy/mailers-t.h
+haproxy-2.6.6/include/haproxy/mailers.h
+haproxy-2.6.6/include/haproxy/map-t.h
+haproxy-2.6.6/include/haproxy/map.h
+haproxy-2.6.6/include/haproxy/mqtt-t.h
+haproxy-2.6.6/include/haproxy/mqtt.h
+haproxy-2.6.6/include/haproxy/mux_quic-t.h
+haproxy-2.6.6/include/haproxy/mux_quic.h
+haproxy-2.6.6/include/haproxy/mworker-t.h
+haproxy-2.6.6/include/haproxy/mworker.h
+haproxy-2.6.6/include/haproxy/namespace-t.h
+haproxy-2.6.6/include/haproxy/namespace.h
+haproxy-2.6.6/include/haproxy/ncbuf-t.h
+haproxy-2.6.6/include/haproxy/ncbuf.h
+haproxy-2.6.6/include/haproxy/net_helper.h
+haproxy-2.6.6/include/haproxy/obj_type-t.h
+haproxy-2.6.6/include/haproxy/obj_type.h
+haproxy-2.6.6/include/haproxy/openssl-compat.h
+haproxy-2.6.6/include/haproxy/pattern-t.h
+haproxy-2.6.6/include/haproxy/pattern.h
+haproxy-2.6.6/include/haproxy/payload.h
+haproxy-2.6.6/include/haproxy/peers-t.h
+haproxy-2.6.6/include/haproxy/peers.h
+haproxy-2.6.6/include/haproxy/pipe-t.h
+haproxy-2.6.6/include/haproxy/pipe.h
+haproxy-2.6.6/include/haproxy/pool-os.h
+haproxy-2.6.6/include/haproxy/pool-t.h
+haproxy-2.6.6/include/haproxy/pool.h
+haproxy-2.6.6/include/haproxy/port_range-t.h
+haproxy-2.6.6/include/haproxy/port_range.h
+haproxy-2.6.6/include/haproxy/proto_quic.h
+haproxy-2.6.6/include/haproxy/proto_sockpair.h
+haproxy-2.6.6/include/haproxy/proto_tcp.h
+haproxy-2.6.6/include/haproxy/proto_udp.h
+haproxy-2.6.6/include/haproxy/proto_uxst.h
+haproxy-2.6.6/include/haproxy/protobuf-t.h
+haproxy-2.6.6/include/haproxy/protobuf.h
+haproxy-2.6.6/include/haproxy/protocol-t.h
+haproxy-2.6.6/include/haproxy/protocol.h
+haproxy-2.6.6/include/haproxy/proxy-t.h
+haproxy-2.6.6/include/haproxy/proxy.h
+haproxy-2.6.6/include/haproxy/qmux_http.h
+haproxy-2.6.6/include/haproxy/qmux_trace.h
+haproxy-2.6.6/include/haproxy/qpack-dec.h
+haproxy-2.6.6/include/haproxy/qpack-enc.h
+haproxy-2.6.6/include/haproxy/qpack-t.h
+haproxy-2.6.6/include/haproxy/qpack-tbl-t.h
+haproxy-2.6.6/include/haproxy/qpack-tbl.h
+haproxy-2.6.6/include/haproxy/queue-t.h
+haproxy-2.6.6/include/haproxy/queue.h
+haproxy-2.6.6/include/haproxy/quic_cc-t.h
+haproxy-2.6.6/include/haproxy/quic_cc.h
+haproxy-2.6.6/include/haproxy/quic_enc.h
+haproxy-2.6.6/include/haproxy/quic_frame-t.h
+haproxy-2.6.6/include/haproxy/quic_frame.h
+haproxy-2.6.6/include/haproxy/quic_loss-t.h
+haproxy-2.6.6/include/haproxy/quic_loss.h
+haproxy-2.6.6/include/haproxy/quic_sock-t.h
+haproxy-2.6.6/include/haproxy/quic_sock.h
+haproxy-2.6.6/include/haproxy/quic_stats-t.h
+haproxy-2.6.6/include/haproxy/quic_stats.h
+haproxy-2.6.6/include/haproxy/quic_stream-t.h
+haproxy-2.6.6/include/haproxy/quic_stream.h
+haproxy-2.6.6/include/haproxy/quic_tls-t.h
+haproxy-2.6.6/include/haproxy/quic_tls.h
+haproxy-2.6.6/include/haproxy/quic_tp-t.h
+haproxy-2.6.6/include/haproxy/quic_tp.h
+haproxy-2.6.6/include/haproxy/receiver-t.h
+haproxy-2.6.6/include/haproxy/regex-t.h
+haproxy-2.6.6/include/haproxy/regex.h
+haproxy-2.6.6/include/haproxy/resolvers-t.h
+haproxy-2.6.6/include/haproxy/resolvers.h
+haproxy-2.6.6/include/haproxy/ring-t.h
+haproxy-2.6.6/include/haproxy/ring.h
+haproxy-2.6.6/include/haproxy/sample-t.h
+haproxy-2.6.6/include/haproxy/sample.h
+haproxy-2.6.6/include/haproxy/sample_data-t.h
+haproxy-2.6.6/include/haproxy/sc_strm.h
+haproxy-2.6.6/include/haproxy/server-t.h
+haproxy-2.6.6/include/haproxy/server.h
+haproxy-2.6.6/include/haproxy/session-t.h
+haproxy-2.6.6/include/haproxy/session.h
+haproxy-2.6.6/include/haproxy/shctx-t.h
+haproxy-2.6.6/include/haproxy/shctx.h
+haproxy-2.6.6/include/haproxy/signal-t.h
+haproxy-2.6.6/include/haproxy/signal.h
+haproxy-2.6.6/include/haproxy/sink-t.h
+haproxy-2.6.6/include/haproxy/sink.h
+haproxy-2.6.6/include/haproxy/sock-t.h
+haproxy-2.6.6/include/haproxy/sock.h
+haproxy-2.6.6/include/haproxy/sock_inet.h
+haproxy-2.6.6/include/haproxy/sock_unix.h
+haproxy-2.6.6/include/haproxy/spoe-t.h
+haproxy-2.6.6/include/haproxy/spoe.h
+haproxy-2.6.6/include/haproxy/ssl_ckch-t.h
+haproxy-2.6.6/include/haproxy/ssl_ckch.h
+haproxy-2.6.6/include/haproxy/ssl_crtlist-t.h
+haproxy-2.6.6/include/haproxy/ssl_crtlist.h
+haproxy-2.6.6/include/haproxy/ssl_sock-t.h
+haproxy-2.6.6/include/haproxy/ssl_sock.h
+haproxy-2.6.6/include/haproxy/ssl_utils.h
+haproxy-2.6.6/include/haproxy/stats-t.h
+haproxy-2.6.6/include/haproxy/stats.h
+haproxy-2.6.6/include/haproxy/stconn-t.h
+haproxy-2.6.6/include/haproxy/stconn.h
+haproxy-2.6.6/include/haproxy/stick_table-t.h
+haproxy-2.6.6/include/haproxy/stick_table.h
+haproxy-2.6.6/include/haproxy/stream-t.h
+haproxy-2.6.6/include/haproxy/stream.h
+haproxy-2.6.6/include/haproxy/task-t.h
+haproxy-2.6.6/include/haproxy/task.h
+haproxy-2.6.6/include/haproxy/tcp_rules.h
+haproxy-2.6.6/include/haproxy/tcpcheck-t.h
+haproxy-2.6.6/include/haproxy/tcpcheck.h
+haproxy-2.6.6/include/haproxy/thread-t.h
+haproxy-2.6.6/include/haproxy/thread.h
+haproxy-2.6.6/include/haproxy/ticks.h
+haproxy-2.6.6/include/haproxy/time.h
+haproxy-2.6.6/include/haproxy/tinfo-t.h
+haproxy-2.6.6/include/haproxy/tinfo.h
+haproxy-2.6.6/include/haproxy/tools-t.h
+haproxy-2.6.6/include/haproxy/tools.h
+haproxy-2.6.6/include/haproxy/trace-t.h
+haproxy-2.6.6/include/haproxy/trace.h
+haproxy-2.6.6/include/haproxy/uri_auth-t.h
+haproxy-2.6.6/include/haproxy/uri_auth.h
+haproxy-2.6.6/include/haproxy/uri_normalizer-t.h
+haproxy-2.6.6/include/haproxy/uri_normalizer.h
+haproxy-2.6.6/include/haproxy/vars-t.h
+haproxy-2.6.6/include/haproxy/vars.h
+haproxy-2.6.6/include/haproxy/version.h
+haproxy-2.6.6/include/haproxy/xprt_quic-t.h
+haproxy-2.6.6/include/haproxy/xprt_quic.h
+haproxy-2.6.6/include/haproxy/xref-t.h
+haproxy-2.6.6/include/haproxy/xref.h
+haproxy-2.6.6/include/haproxy/xxhash.h
+haproxy-2.6.6/include/import/
+haproxy-2.6.6/include/import/atomic-ops.h
+haproxy-2.6.6/include/import/eb32sctree.h
+haproxy-2.6.6/include/import/eb32tree.h
+haproxy-2.6.6/include/import/eb64tree.h
+haproxy-2.6.6/include/import/ebimtree.h
+haproxy-2.6.6/include/import/ebistree.h
+haproxy-2.6.6/include/import/ebmbtree.h
+haproxy-2.6.6/include/import/ebpttree.h
+haproxy-2.6.6/include/import/ebsttree.h
+haproxy-2.6.6/include/import/ebtree-t.h
+haproxy-2.6.6/include/import/ebtree.h
+haproxy-2.6.6/include/import/ist.h
+haproxy-2.6.6/include/import/lru.h
+haproxy-2.6.6/include/import/mjson.h
+haproxy-2.6.6/include/import/plock.h
+haproxy-2.6.6/include/import/sha1.h
+haproxy-2.6.6/include/import/slz-tables.h
+haproxy-2.6.6/include/import/slz.h
+haproxy-2.6.6/include/import/xxhash.h
+haproxy-2.6.6/reg-tests/
+haproxy-2.6.6/reg-tests/README
+haproxy-2.6.6/reg-tests/balance/
+haproxy-2.6.6/reg-tests/balance/balance-rr.vtc
+haproxy-2.6.6/reg-tests/balance/balance-uri-path-only.vtc
+haproxy-2.6.6/reg-tests/balance/balance-uri.vtc
+haproxy-2.6.6/reg-tests/cache/
+haproxy-2.6.6/reg-tests/cache/basic.vtc
+haproxy-2.6.6/reg-tests/cache/caching_rules.vtc
+haproxy-2.6.6/reg-tests/cache/expires.vtc
+haproxy-2.6.6/reg-tests/cache/if-modified-since.vtc
+haproxy-2.6.6/reg-tests/cache/if-none-match.vtc
+haproxy-2.6.6/reg-tests/cache/post_on_entry.vtc
+haproxy-2.6.6/reg-tests/cache/sample_fetches.vtc
+haproxy-2.6.6/reg-tests/cache/vary.vtc
+haproxy-2.6.6/reg-tests/cache/vary_accept_encoding.vtc
+haproxy-2.6.6/reg-tests/checks/
+haproxy-2.6.6/reg-tests/checks/1be_40srv_odd_health_checks.vtc
+haproxy-2.6.6/reg-tests/checks/40be_2srv_odd_health_checks.vtc
+haproxy-2.6.6/reg-tests/checks/4be_1srv_health_checks.vtc
+haproxy-2.6.6/reg-tests/checks/4be_1srv_smtpchk_httpchk_layer47errors.vtc
+haproxy-2.6.6/reg-tests/checks/agent-check.vtc
+haproxy-2.6.6/reg-tests/checks/common.pem
+haproxy-2.6.6/reg-tests/checks/http-check-expect.vtc
+haproxy-2.6.6/reg-tests/checks/http-check-send.vtc
+haproxy-2.6.6/reg-tests/checks/http-check.vtc
+haproxy-2.6.6/reg-tests/checks/http-monitor-uri.vtc
+haproxy-2.6.6/reg-tests/checks/ldap-check.vtc
+haproxy-2.6.6/reg-tests/checks/mysql-check.vtc
+haproxy-2.6.6/reg-tests/checks/pgsql-check.vtc
+haproxy-2.6.6/reg-tests/checks/redis-check.vtc
+haproxy-2.6.6/reg-tests/checks/smtp-check.vtc
+haproxy-2.6.6/reg-tests/checks/spop-check.vtc
+haproxy-2.6.6/reg-tests/checks/ssl-hello-check.vtc
+haproxy-2.6.6/reg-tests/checks/tcp-check-ssl.vtc
+haproxy-2.6.6/reg-tests/checks/tcp-check_min-recv.vtc
+haproxy-2.6.6/reg-tests/checks/tcp-check_multiple_ports.vtc
+haproxy-2.6.6/reg-tests/checks/tcp-checks-socks4.vtc
+haproxy-2.6.6/reg-tests/checks/tls_health_checks.vtc
+haproxy-2.6.6/reg-tests/compression/
+haproxy-2.6.6/reg-tests/compression/basic.vtc
+haproxy-2.6.6/reg-tests/compression/common.pem
+haproxy-2.6.6/reg-tests/compression/etags_conversion.vtc
+haproxy-2.6.6/reg-tests/compression/lua_validation.lua
+haproxy-2.6.6/reg-tests/compression/lua_validation.vtc
+haproxy-2.6.6/reg-tests/compression/vary.vtc
+haproxy-2.6.6/reg-tests/connection/
+haproxy-2.6.6/reg-tests/connection/cli_src_dst.vtc
+haproxy-2.6.6/reg-tests/connection/common.pem
+haproxy-2.6.6/reg-tests/connection/dispatch.vtc
+haproxy-2.6.6/reg-tests/connection/http_reuse_aggressive.vtc
+haproxy-2.6.6/reg-tests/connection/http_reuse_always.vtc
+haproxy-2.6.6/reg-tests/connection/http_reuse_be_transparent.vtc
+haproxy-2.6.6/reg-tests/connection/http_reuse_conn_hash.vtc
+haproxy-2.6.6/reg-tests/connection/http_reuse_dispatch.vtc
+haproxy-2.6.6/reg-tests/connection/http_reuse_never.vtc
+haproxy-2.6.6/reg-tests/connection/http_reuse_safe.vtc
+haproxy-2.6.6/reg-tests/connection/proxy_protocol_random_fail.vtc
+haproxy-2.6.6/reg-tests/connection/proxy_protocol_send_unique_id.vtc
+haproxy-2.6.6/reg-tests/connection/proxy_protocol_send_unique_id_alpn.vtc
+haproxy-2.6.6/reg-tests/connection/proxy_protocol_tlv_validation.vtc
+haproxy-2.6.6/reg-tests/connection/tcp_to_http_upgrade.vtc
+haproxy-2.6.6/reg-tests/contrib/
+haproxy-2.6.6/reg-tests/contrib/prometheus.vtc
+haproxy-2.6.6/reg-tests/converter/
+haproxy-2.6.6/reg-tests/converter/add_item.vtc
+haproxy-2.6.6/reg-tests/converter/be2dec.vtc
+haproxy-2.6.6/reg-tests/converter/be2hex.vtc
+haproxy-2.6.6/reg-tests/converter/digest.vtc
+haproxy-2.6.6/reg-tests/converter/field.vtc
+haproxy-2.6.6/reg-tests/converter/fix.vtc
+haproxy-2.6.6/reg-tests/converter/hmac.vtc
+haproxy-2.6.6/reg-tests/converter/iif.vtc
+haproxy-2.6.6/reg-tests/converter/json.vtc
+haproxy-2.6.6/reg-tests/converter/json_query.vtc
+haproxy-2.6.6/reg-tests/converter/mqtt.vtc
+haproxy-2.6.6/reg-tests/converter/secure_memcmp.vtc
+haproxy-2.6.6/reg-tests/converter/sha2.vtc
+haproxy-2.6.6/reg-tests/converter/url_dec.vtc
+haproxy-2.6.6/reg-tests/converter/url_enc.vtc
+haproxy-2.6.6/reg-tests/filters/
+haproxy-2.6.6/reg-tests/filters/random-forwarding.vtc
+haproxy-2.6.6/reg-tests/http-capture/
+haproxy-2.6.6/reg-tests/http-capture/multiple_headers.vtc
+haproxy-2.6.6/reg-tests/http-cookies/
+haproxy-2.6.6/reg-tests/http-cookies/cookie_insert_indirect.vtc
+haproxy-2.6.6/reg-tests/http-cookies/h2_cookie_concat.vtc
+haproxy-2.6.6/reg-tests/http-errorfiles/
+haproxy-2.6.6/reg-tests/http-errorfiles/errorfiles.vtc
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/400-1.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/400-2.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/400-3.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/400.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/403-1.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/403-2.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/403.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/404-1.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/404-2.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/404-3.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/404.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/500-1.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/500.http
+haproxy-2.6.6/reg-tests/http-errorfiles/errors/lf-403.txt
+haproxy-2.6.6/reg-tests/http-errorfiles/http-error.vtc
+haproxy-2.6.6/reg-tests/http-errorfiles/http_deny_errors.vtc
+haproxy-2.6.6/reg-tests/http-errorfiles/http_errors.vtc
+haproxy-2.6.6/reg-tests/http-errorfiles/http_return.vtc
+haproxy-2.6.6/reg-tests/http-messaging/
+haproxy-2.6.6/reg-tests/http-messaging/common.pem
+haproxy-2.6.6/reg-tests/http-messaging/h1_host_normalization.vtc
+haproxy-2.6.6/reg-tests/http-messaging/h1_to_h1.vtc
+haproxy-2.6.6/reg-tests/http-messaging/h2_desync_attacks.vtc
+haproxy-2.6.6/reg-tests/http-messaging/h2_to_h1.vtc
+haproxy-2.6.6/reg-tests/http-messaging/http_abortonclose.vtc
+haproxy-2.6.6/reg-tests/http-messaging/http_bodyless_response.vtc
+haproxy-2.6.6/reg-tests/http-messaging/http_msg_full_on_eom.vtc
+haproxy-2.6.6/reg-tests/http-messaging/http_request_buffer.vtc
+haproxy-2.6.6/reg-tests/http-messaging/http_splicing.vtc
+haproxy-2.6.6/reg-tests/http-messaging/http_transfer_encoding.vtc
+haproxy-2.6.6/reg-tests/http-messaging/http_wait_for_body.vtc
+haproxy-2.6.6/reg-tests/http-messaging/protocol_upgrade.vtc
+haproxy-2.6.6/reg-tests/http-messaging/scheme_based_normalize.vtc
+haproxy-2.6.6/reg-tests/http-messaging/srv_ws.vtc
+haproxy-2.6.6/reg-tests/http-messaging/websocket.vtc
+haproxy-2.6.6/reg-tests/http-rules/
+haproxy-2.6.6/reg-tests/http-rules/1k.txt
+haproxy-2.6.6/reg-tests/http-rules/acl_cli_spaces.vtc
+haproxy-2.6.6/reg-tests/http-rules/agents.acl
+haproxy-2.6.6/reg-tests/http-rules/converters_ipmask_concat_strcmp_field_word.map
+haproxy-2.6.6/reg-tests/http-rules/converters_ipmask_concat_strcmp_field_word.vtc
+haproxy-2.6.6/reg-tests/http-rules/default_rules.vtc
+haproxy-2.6.6/reg-tests/http-rules/del_header.vtc
+haproxy-2.6.6/reg-tests/http-rules/except-forwardfor-originalto.vtc
+haproxy-2.6.6/reg-tests/http-rules/h1_to_h1c.vtc
+haproxy-2.6.6/reg-tests/http-rules/h1or2_to_h1c.vtc
+haproxy-2.6.6/reg-tests/http-rules/http_after_response.vtc
+haproxy-2.6.6/reg-tests/http-rules/http_return.vtc
+haproxy-2.6.6/reg-tests/http-rules/lf-file.txt
+haproxy-2.6.6/reg-tests/http-rules/map_redirect-be.map
+haproxy-2.6.6/reg-tests/http-rules/map_redirect.map
+haproxy-2.6.6/reg-tests/http-rules/map_redirect.vtc
+haproxy-2.6.6/reg-tests/http-rules/map_regm_with_backref.map
+haproxy-2.6.6/reg-tests/http-rules/map_regm_with_backref.vtc
+haproxy-2.6.6/reg-tests/http-rules/normalize_uri.vtc
+haproxy-2.6.6/reg-tests/http-rules/path_and_pathq.vtc
+haproxy-2.6.6/reg-tests/http-rules/restrict_req_hdr_names.vtc
+haproxy-2.6.6/reg-tests/http-rules/strict_rw_mode.vtc
+haproxy-2.6.6/reg-tests/http-set-timeout/
+haproxy-2.6.6/reg-tests/http-set-timeout/set_timeout.vtc
+haproxy-2.6.6/reg-tests/jwt/
+haproxy-2.6.6/reg-tests/jwt/es256-public.pem
+haproxy-2.6.6/reg-tests/jwt/es384-public.pem
+haproxy-2.6.6/reg-tests/jwt/es512-public.pem
+haproxy-2.6.6/reg-tests/jwt/jws_verify.vtc
+haproxy-2.6.6/reg-tests/jwt/rsa-public.pem
+haproxy-2.6.6/reg-tests/log/
+haproxy-2.6.6/reg-tests/log/last_rule.vtc
+haproxy-2.6.6/reg-tests/log/load_balancing.vtc
+haproxy-2.6.6/reg-tests/log/log_forward.vtc
+haproxy-2.6.6/reg-tests/log/log_uri.vtc
+haproxy-2.6.6/reg-tests/log/wrong_ip_port_logging.vtc
+haproxy-2.6.6/reg-tests/lua/
+haproxy-2.6.6/reg-tests/lua/bad_http_clt_req_duration.lua
+haproxy-2.6.6/reg-tests/lua/bad_http_clt_req_duration.vtc
+haproxy-2.6.6/reg-tests/lua/close_wait_lf.lua
+haproxy-2.6.6/reg-tests/lua/close_wait_lf.vtc
+haproxy-2.6.6/reg-tests/lua/common.pem
+haproxy-2.6.6/reg-tests/lua/h_txn_get_priv.lua
+haproxy-2.6.6/reg-tests/lua/h_txn_get_priv.vtc
+haproxy-2.6.6/reg-tests/lua/lua_httpclient.lua
+haproxy-2.6.6/reg-tests/lua/lua_httpclient.vtc
+haproxy-2.6.6/reg-tests/lua/lua_socket.lua
+haproxy-2.6.6/reg-tests/lua/lua_socket.vtc
+haproxy-2.6.6/reg-tests/lua/set_var.lua
+haproxy-2.6.6/reg-tests/lua/set_var.vtc
+haproxy-2.6.6/reg-tests/lua/txn_get_priv-print_r.lua
+haproxy-2.6.6/reg-tests/lua/txn_get_priv-thread.vtc
+haproxy-2.6.6/reg-tests/lua/txn_get_priv.lua
+haproxy-2.6.6/reg-tests/lua/txn_get_priv.vtc
+haproxy-2.6.6/reg-tests/lua/wrong_types_usage.lua
+haproxy-2.6.6/reg-tests/lua/wrong_types_usage.vtc
+haproxy-2.6.6/reg-tests/mailers/
+haproxy-2.6.6/reg-tests/mailers/healthcheckmail.lua
+haproxy-2.6.6/reg-tests/mailers/healthcheckmail.vtc
+haproxy-2.6.6/reg-tests/mcli/
+haproxy-2.6.6/reg-tests/mcli/mcli_show_info.vtc
+haproxy-2.6.6/reg-tests/mcli/mcli_start_progs.vtc
+haproxy-2.6.6/reg-tests/peers/
+haproxy-2.6.6/reg-tests/peers/basic_sync.vtc
+haproxy-2.6.6/reg-tests/peers/basic_sync_wo_stkt_backend.vtc
+haproxy-2.6.6/reg-tests/peers/common.pem
+haproxy-2.6.6/reg-tests/peers/tls_basic_sync.vtc
+haproxy-2.6.6/reg-tests/peers/tls_basic_sync_wo_stkt_backend.vtc
+haproxy-2.6.6/reg-tests/sample_fetches/
+haproxy-2.6.6/reg-tests/sample_fetches/cond_set_var.vtc
+haproxy-2.6.6/reg-tests/sample_fetches/cook.vtc
+haproxy-2.6.6/reg-tests/sample_fetches/hashes.vtc
+haproxy-2.6.6/reg-tests/sample_fetches/so_name.vtc
+haproxy-2.6.6/reg-tests/sample_fetches/srv_name.vtc
+haproxy-2.6.6/reg-tests/sample_fetches/ubase64.vtc
+haproxy-2.6.6/reg-tests/sample_fetches/vars.vtc
+haproxy-2.6.6/reg-tests/seamless-reload/
+haproxy-2.6.6/reg-tests/seamless-reload/abns_socket.vtc
+haproxy-2.6.6/reg-tests/server/
+haproxy-2.6.6/reg-tests/server/cli_add_check_server.vtc
+haproxy-2.6.6/reg-tests/server/cli_add_server.vtc
+haproxy-2.6.6/reg-tests/server/cli_add_ssl_server.vtc
+haproxy-2.6.6/reg-tests/server/cli_add_track_server.vtc
+haproxy-2.6.6/reg-tests/server/cli_delete_dynamic_server.vtc
+haproxy-2.6.6/reg-tests/server/cli_delete_server.vtc
+haproxy-2.6.6/reg-tests/server/cli_delete_server_lua.vtc
+haproxy-2.6.6/reg-tests/server/cli_set_fdqn.vtc
+haproxy-2.6.6/reg-tests/server/cli_set_ssl.vtc
+haproxy-2.6.6/reg-tests/server/common.pem
+haproxy-2.6.6/reg-tests/server/get_srv_stats.lua
+haproxy-2.6.6/reg-tests/spoe/
+haproxy-2.6.6/reg-tests/spoe/wrong_init.vtc
+haproxy-2.6.6/reg-tests/ssl/
+haproxy-2.6.6/reg-tests/ssl/README
+haproxy-2.6.6/reg-tests/ssl/add_ssl_crt-list.vtc
+haproxy-2.6.6/reg-tests/ssl/ca-auth.crt
+haproxy-2.6.6/reg-tests/ssl/cert1-example.com.pem.ecdsa
+haproxy-2.6.6/reg-tests/ssl/cert1-example.com.pem.rsa
+haproxy-2.6.6/reg-tests/ssl/cert2-example.com.pem.ecdsa
+haproxy-2.6.6/reg-tests/ssl/cert2-example.com.pem.rsa
+haproxy-2.6.6/reg-tests/ssl/client.ecdsa.pem
+haproxy-2.6.6/reg-tests/ssl/client1.pem
+haproxy-2.6.6/reg-tests/ssl/client2_expired.pem
+haproxy-2.6.6/reg-tests/ssl/client3_revoked.pem
+haproxy-2.6.6/reg-tests/ssl/common.4096.dh
+haproxy-2.6.6/reg-tests/ssl/common.crt
+haproxy-2.6.6/reg-tests/ssl/common.key
+haproxy-2.6.6/reg-tests/ssl/common.pem
+haproxy-2.6.6/reg-tests/ssl/crl-auth.pem
+haproxy-2.6.6/reg-tests/ssl/del_ssl_crt-list.vtc
+haproxy-2.6.6/reg-tests/ssl/dynamic_server_ssl.vtc
+haproxy-2.6.6/reg-tests/ssl/ecdsa.crt
+haproxy-2.6.6/reg-tests/ssl/ecdsa.key
+haproxy-2.6.6/reg-tests/ssl/ecdsa.pem
+haproxy-2.6.6/reg-tests/ssl/filters.crt-list
+haproxy-2.6.6/reg-tests/ssl/generate_certificates/
+haproxy-2.6.6/reg-tests/ssl/generate_certificates/gen_cert_ca.pem
+haproxy-2.6.6/reg-tests/ssl/generate_certificates/gen_cert_server.pem
+haproxy-2.6.6/reg-tests/ssl/interCA1_crl.pem
+haproxy-2.6.6/reg-tests/ssl/interCA1_crl_empty.pem
+haproxy-2.6.6/reg-tests/ssl/interCA2_crl.pem
+haproxy-2.6.6/reg-tests/ssl/interCA2_crl_empty.pem
+haproxy-2.6.6/reg-tests/ssl/localhost.crt-list
+haproxy-2.6.6/reg-tests/ssl/log_forward_ssl.vtc
+haproxy-2.6.6/reg-tests/ssl/new_del_ssl_cafile.vtc
+haproxy-2.6.6/reg-tests/ssl/new_del_ssl_crlfile.vtc
+haproxy-2.6.6/reg-tests/ssl/rootCA_crl.pem
+haproxy-2.6.6/reg-tests/ssl/set_cafile_client.pem
+haproxy-2.6.6/reg-tests/ssl/set_cafile_interCA1.crt
+haproxy-2.6.6/reg-tests/ssl/set_cafile_interCA2.crt
+haproxy-2.6.6/reg-tests/ssl/set_cafile_rootCA.crt
+haproxy-2.6.6/reg-tests/ssl/set_cafile_server.pem
+haproxy-2.6.6/reg-tests/ssl/set_default_cert.crt-list
+haproxy-2.6.6/reg-tests/ssl/set_default_cert.pem
+haproxy-2.6.6/reg-tests/ssl/set_ssl_cafile.vtc
+haproxy-2.6.6/reg-tests/ssl/set_ssl_cert.vtc
+haproxy-2.6.6/reg-tests/ssl/set_ssl_cert_bundle.vtc
+haproxy-2.6.6/reg-tests/ssl/set_ssl_cert_noext.vtc
+haproxy-2.6.6/reg-tests/ssl/set_ssl_crlfile.vtc
+haproxy-2.6.6/reg-tests/ssl/set_ssl_server_cert.vtc
+haproxy-2.6.6/reg-tests/ssl/show_ocsp_server.pem
+haproxy-2.6.6/reg-tests/ssl/show_ocsp_server.pem.issuer
+haproxy-2.6.6/reg-tests/ssl/show_ocsp_server.pem.ocsp
+haproxy-2.6.6/reg-tests/ssl/show_ocsp_server.pem.ocsp.revoked
+haproxy-2.6.6/reg-tests/ssl/show_ssl_ocspresponse.vtc
+haproxy-2.6.6/reg-tests/ssl/simple.crt-list
+haproxy-2.6.6/reg-tests/ssl/ssl_client_auth.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_client_samples.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_crt-list_filters.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_curves.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_default_server.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_dh.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_errors.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_frontend_samples.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_generate_certificate.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_reuse.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_server_samples.vtc
+haproxy-2.6.6/reg-tests/ssl/ssl_simple_crt-list.vtc
+haproxy-2.6.6/reg-tests/ssl/wrong_ctx_storage.vtc
+haproxy-2.6.6/reg-tests/startup/
+haproxy-2.6.6/reg-tests/startup/check_condition.vtc
+haproxy-2.6.6/reg-tests/startup/default_rules.vtc
+haproxy-2.6.6/reg-tests/stick-table/
+haproxy-2.6.6/reg-tests/stick-table/converteers_ref_cnt_never_dec.vtc
+haproxy-2.6.6/reg-tests/stick-table/src_conn_rate.vtc
+haproxy-2.6.6/reg-tests/stick-table/unknown_key.vtc
+haproxy-2.6.6/reg-tests/stickiness/
+haproxy-2.6.6/reg-tests/stickiness/lb-services.vtc
+haproxy-2.6.6/reg-tests/stickiness/srvkey-addr.vtc
+haproxy-2.6.6/reg-tests/stream/
+haproxy-2.6.6/reg-tests/stream/unique-id-from-proxy.vtc
+haproxy-2.6.6/reg-tests/stream/unique-id.vtc
+haproxy-2.6.6/reg-tests/tcp-rules/
+haproxy-2.6.6/reg-tests/tcp-rules/default_rules.vtc
+haproxy-2.6.6/reg-tests/webstats/
+haproxy-2.6.6/reg-tests/webstats/webstats-scope-and-post-change.vtc
+haproxy-2.6.6/scripts/
+haproxy-2.6.6/scripts/announce-release
+haproxy-2.6.6/scripts/backport
+haproxy-2.6.6/scripts/build-ot.sh
+haproxy-2.6.6/scripts/build-ssl.sh
+haproxy-2.6.6/scripts/build-vtest.sh
+haproxy-2.6.6/scripts/create-release
+haproxy-2.6.6/scripts/git-show-backports
+haproxy-2.6.6/scripts/make-releases-json
+haproxy-2.6.6/scripts/publish-release
+haproxy-2.6.6/scripts/run-regtests.sh
+haproxy-2.6.6/src/
+haproxy-2.6.6/src/acl.c
+haproxy-2.6.6/src/action.c
+haproxy-2.6.6/src/activity.c
+haproxy-2.6.6/src/applet.c
+haproxy-2.6.6/src/arg.c
+haproxy-2.6.6/src/auth.c
+haproxy-2.6.6/src/backend.c
+haproxy-2.6.6/src/base64.c
+haproxy-2.6.6/src/cache.c
+haproxy-2.6.6/src/calltrace.c
+haproxy-2.6.6/src/cbuf.c
+haproxy-2.6.6/src/cfgcond.c
+haproxy-2.6.6/src/cfgdiag.c
+haproxy-2.6.6/src/cfgparse-global.c
+haproxy-2.6.6/src/cfgparse-listen.c
+haproxy-2.6.6/src/cfgparse-quic.c
+haproxy-2.6.6/src/cfgparse-ssl.c
+haproxy-2.6.6/src/cfgparse-tcp.c
+haproxy-2.6.6/src/cfgparse-unix.c
+haproxy-2.6.6/src/cfgparse.c
+haproxy-2.6.6/src/channel.c
+haproxy-2.6.6/src/check.c
+haproxy-2.6.6/src/chunk.c
+haproxy-2.6.6/src/cli.c
+haproxy-2.6.6/src/clock.c
+haproxy-2.6.6/src/compression.c
+haproxy-2.6.6/src/connection.c
+haproxy-2.6.6/src/cpuset.c
+haproxy-2.6.6/src/debug.c
+haproxy-2.6.6/src/dgram.c
+haproxy-2.6.6/src/dict.c
+haproxy-2.6.6/src/dns.c
+haproxy-2.6.6/src/dynbuf.c
+haproxy-2.6.6/src/eb32sctree.c
+haproxy-2.6.6/src/eb32tree.c
+haproxy-2.6.6/src/eb64tree.c
+haproxy-2.6.6/src/ebimtree.c
+haproxy-2.6.6/src/ebistree.c
+haproxy-2.6.6/src/ebmbtree.c
+haproxy-2.6.6/src/ebpttree.c
+haproxy-2.6.6/src/ebsttree.c
+haproxy-2.6.6/src/ebtree.c
+haproxy-2.6.6/src/errors.c
+haproxy-2.6.6/src/ev_epoll.c
+haproxy-2.6.6/src/ev_evports.c
+haproxy-2.6.6/src/ev_kqueue.c
+haproxy-2.6.6/src/ev_poll.c
+haproxy-2.6.6/src/ev_select.c
+haproxy-2.6.6/src/extcheck.c
+haproxy-2.6.6/src/fcgi-app.c
+haproxy-2.6.6/src/fcgi.c
+haproxy-2.6.6/src/fd.c
+haproxy-2.6.6/src/filters.c
+haproxy-2.6.6/src/fix.c
+haproxy-2.6.6/src/flt_http_comp.c
+haproxy-2.6.6/src/flt_spoe.c
+haproxy-2.6.6/src/flt_trace.c
+haproxy-2.6.6/src/freq_ctr.c
+haproxy-2.6.6/src/frontend.c
+haproxy-2.6.6/src/h1.c
+haproxy-2.6.6/src/h1_htx.c
+haproxy-2.6.6/src/h2.c
+haproxy-2.6.6/src/h3.c
+haproxy-2.6.6/src/h3_stats.c
+haproxy-2.6.6/src/haproxy.c
+haproxy-2.6.6/src/hash.c
+haproxy-2.6.6/src/hlua.c
+haproxy-2.6.6/src/hlua_fcn.c
+haproxy-2.6.6/src/hpack-dec.c
+haproxy-2.6.6/src/hpack-enc.c
+haproxy-2.6.6/src/hpack-huff.c
+haproxy-2.6.6/src/hpack-tbl.c
+haproxy-2.6.6/src/hq_interop.c
+haproxy-2.6.6/src/http.c
+haproxy-2.6.6/src/http_acl.c
+haproxy-2.6.6/src/http_act.c
+haproxy-2.6.6/src/http_ana.c
+haproxy-2.6.6/src/http_client.c
+haproxy-2.6.6/src/http_conv.c
+haproxy-2.6.6/src/http_fetch.c
+haproxy-2.6.6/src/http_htx.c
+haproxy-2.6.6/src/http_rules.c
+haproxy-2.6.6/src/htx.c
+haproxy-2.6.6/src/init.c
+haproxy-2.6.6/src/jwt.c
+haproxy-2.6.6/src/lb_chash.c
+haproxy-2.6.6/src/lb_fas.c
+haproxy-2.6.6/src/lb_fwlc.c
+haproxy-2.6.6/src/lb_fwrr.c
+haproxy-2.6.6/src/lb_map.c
+haproxy-2.6.6/src/listener.c
+haproxy-2.6.6/src/log.c
+haproxy-2.6.6/src/lru.c
+haproxy-2.6.6/src/mailers.c
+haproxy-2.6.6/src/map.c
+haproxy-2.6.6/src/mjson.c
+haproxy-2.6.6/src/mqtt.c
+haproxy-2.6.6/src/mux_fcgi.c
+haproxy-2.6.6/src/mux_h1.c
+haproxy-2.6.6/src/mux_h2.c
+haproxy-2.6.6/src/mux_pt.c
+haproxy-2.6.6/src/mux_quic.c
+haproxy-2.6.6/src/mworker-prog.c
+haproxy-2.6.6/src/mworker.c
+haproxy-2.6.6/src/namespace.c
+haproxy-2.6.6/src/ncbuf.c
+haproxy-2.6.6/src/pattern.c
+haproxy-2.6.6/src/payload.c
+haproxy-2.6.6/src/peers.c
+haproxy-2.6.6/src/pipe.c
+haproxy-2.6.6/src/pool.c
+haproxy-2.6.6/src/proto_quic.c
+haproxy-2.6.6/src/proto_sockpair.c
+haproxy-2.6.6/src/proto_tcp.c
+haproxy-2.6.6/src/proto_udp.c
+haproxy-2.6.6/src/proto_uxdg.c
+haproxy-2.6.6/src/proto_uxst.c
+haproxy-2.6.6/src/protocol.c
+haproxy-2.6.6/src/proxy.c
+haproxy-2.6.6/src/qmux_http.c
+haproxy-2.6.6/src/qmux_trace.c
+haproxy-2.6.6/src/qpack-dec.c
+haproxy-2.6.6/src/qpack-enc.c
+haproxy-2.6.6/src/qpack-tbl.c
+haproxy-2.6.6/src/queue.c
+haproxy-2.6.6/src/quic_cc.c
+haproxy-2.6.6/src/quic_cc_cubic.c
+haproxy-2.6.6/src/quic_cc_newreno.c
+haproxy-2.6.6/src/quic_frame.c
+haproxy-2.6.6/src/quic_loss.c
+haproxy-2.6.6/src/quic_sock.c
+haproxy-2.6.6/src/quic_stats.c
+haproxy-2.6.6/src/quic_stream.c
+haproxy-2.6.6/src/quic_tls.c
+haproxy-2.6.6/src/quic_tp.c
+haproxy-2.6.6/src/raw_sock.c
+haproxy-2.6.6/src/regex.c
+haproxy-2.6.6/src/resolvers.c
+haproxy-2.6.6/src/ring.c
+haproxy-2.6.6/src/sample.c
+haproxy-2.6.6/src/server.c
+haproxy-2.6.6/src/server_state.c
+haproxy-2.6.6/src/session.c
+haproxy-2.6.6/src/sha1.c
+haproxy-2.6.6/src/shctx.c
+haproxy-2.6.6/src/signal.c
+haproxy-2.6.6/src/sink.c
+haproxy-2.6.6/src/slz.c
+haproxy-2.6.6/src/sock.c
+haproxy-2.6.6/src/sock_inet.c
+haproxy-2.6.6/src/sock_unix.c
+haproxy-2.6.6/src/ssl_ckch.c
+haproxy-2.6.6/src/ssl_crtlist.c
+haproxy-2.6.6/src/ssl_sample.c
+haproxy-2.6.6/src/ssl_sock.c
+haproxy-2.6.6/src/ssl_utils.c
+haproxy-2.6.6/src/stats.c
+haproxy-2.6.6/src/stconn.c
+haproxy-2.6.6/src/stick_table.c
+haproxy-2.6.6/src/stream.c
+haproxy-2.6.6/src/task.c
+haproxy-2.6.6/src/tcp_act.c
+haproxy-2.6.6/src/tcp_rules.c
+haproxy-2.6.6/src/tcp_sample.c
+haproxy-2.6.6/src/tcpcheck.c
+haproxy-2.6.6/src/thread.c
+haproxy-2.6.6/src/time.c
+haproxy-2.6.6/src/tools.c
+haproxy-2.6.6/src/trace.c
+haproxy-2.6.6/src/uri_auth.c
+haproxy-2.6.6/src/uri_normalizer.c
+haproxy-2.6.6/src/vars.c
+haproxy-2.6.6/src/version.c
+haproxy-2.6.6/src/wdt.c
+haproxy-2.6.6/src/xprt_handshake.c
+haproxy-2.6.6/src/xprt_quic.c
+haproxy-2.6.6/tests/
+haproxy-2.6.6/tests/conf/
+haproxy-2.6.6/tests/conf/basic-check.cfg
+haproxy-2.6.6/tests/conf/ext-check.cfg
+haproxy-2.6.6/tests/conf/ports.cfg
+haproxy-2.6.6/tests/conf/setstatus.lua
+haproxy-2.6.6/tests/conf/tcp-check.cfg
+haproxy-2.6.6/tests/conf/test-acl-args.cfg
+haproxy-2.6.6/tests/conf/test-address-syntax.cfg
+haproxy-2.6.6/tests/conf/test-backlog.cfg
+haproxy-2.6.6/tests/conf/test-check-expect.cfg
+haproxy-2.6.6/tests/conf/test-connection.cfg
+haproxy-2.6.6/tests/conf/test-cookie-indirect.cfg
+haproxy-2.6.6/tests/conf/test-cookie-insert.cfg
+haproxy-2.6.6/tests/conf/test-cookie-passive.cfg
+haproxy-2.6.6/tests/conf/test-cookie-prefix.cfg
+haproxy-2.6.6/tests/conf/test-cookie-rewrite.cfg
+haproxy-2.6.6/tests/conf/test-disable-404.cfg
+haproxy-2.6.6/tests/conf/test-fsm.cfg
+haproxy-2.6.6/tests/conf/test-fwlc.cfg
+haproxy-2.6.6/tests/conf/test-fwrr.cfg
+haproxy-2.6.6/tests/conf/test-handshakes-chk.cfg
+haproxy-2.6.6/tests/conf/test-handshakes.cfg
+haproxy-2.6.6/tests/conf/test-http-send-name-hdr.cfg
+haproxy-2.6.6/tests/conf/test-http-set-status-lua.cfg
+haproxy-2.6.6/tests/conf/test-http-set-status.cfg
+haproxy-2.6.6/tests/conf/test-inspect-smtp.cfg
+haproxy-2.6.6/tests/conf/test-inspect-ssl.cfg
+haproxy-2.6.6/tests/conf/test-map-ports.cfg
+haproxy-2.6.6/tests/conf/test-param-hash.cfg
+haproxy-2.6.6/tests/conf/test-pollers.cfg
+haproxy-2.6.6/tests/conf/test-redirect.cfg
+haproxy-2.6.6/tests/conf/test-sample-fetch-args.cfg
+haproxy-2.6.6/tests/conf/test-sample-fetch-conv.cfg
+haproxy-2.6.6/tests/conf/test-sql.cfg
+haproxy-2.6.6/tests/conf/test-srv-verify.cfg
+haproxy-2.6.6/tests/conf/test-stats.cfg
+haproxy-2.6.6/tests/conf/test-str2sa.cfg
+haproxy-2.6.6/tests/conf/test-time.cfg
+haproxy-2.6.6/tests/conf/test-timeout.cfg
+haproxy-2.6.6/tests/conf/test-url-hash.cfg
+haproxy-2.6.6/tests/conf/test-valid-names.cfg
+haproxy-2.6.6/tests/exp/
+haproxy-2.6.6/tests/exp/blocksig.c
+haproxy-2.6.6/tests/exp/filltab25.c
+haproxy-2.6.6/tests/exp/hash_results.txt
+haproxy-2.6.6/tests/exp/hashing-results.txt
+haproxy-2.6.6/tests/exp/io_limits.txt
+haproxy-2.6.6/tests/exp/ip-hash.c
+haproxy-2.6.6/tests/exp/test_hashes.c
+haproxy-2.6.6/tests/exp/testinet.c
+haproxy-2.6.6/tests/exp/uri_hash.c
+haproxy-2.6.6/tests/unit/
+haproxy-2.6.6/tests/unit/ist.c
+haproxy-2.6.6/tests/unit/test-arg.c
+haproxy-2.6.6/tests/unit/test-inherited-fd.py
+haproxy-2.6.6/tests/unit/test-list.c
+haproxy-2.6.6/tests/unit/test-sockpair.py
+  CC      src/slz.o
+  CC      src/ev_poll.o
+  CC      src/ev_epoll.o
+  CC      src/cpuset.o
+  CC      src/namespace.o
+  CC      src/mux_h2.o
+  CC      src/mux_fcgi.o
+  CC      src/mux_h1.o
+  CC      src/tcpcheck.o
+  CC      src/stream.o
+  CC      src/stats.o
+  CC      src/http_ana.o
+  CC      src/server.o
+  CC      src/stick_table.o
+  CC      src/sample.o
+  CC      src/flt_spoe.o
+  CC      src/tools.o
+  CC      src/log.o
+  CC      src/cfgparse.o
+  CC      src/peers.o
+  CC      src/backend.o
+  CC      src/resolvers.o
+  CC      src/cli.o
+  CC      src/connection.o
+  CC      src/proxy.o
+  CC      src/http_htx.o
+  CC      src/cfgparse-listen.o
+  CC      src/pattern.o
+  CC      src/check.o
+  CC      src/haproxy.o
+  CC      src/cache.o
+  CC      src/stconn.o
+  CC      src/http_act.o
+  CC      src/http_fetch.o
+  CC      src/http_client.o
+  CC      src/listener.o
+  CC      src/dns.o
+  CC      src/vars.o
+  CC      src/debug.o
+  CC      src/tcp_rules.o
+  CC      src/sink.o
+  CC      src/h1_htx.o
+  CC      src/task.o
+  CC      src/mjson.o
+  CC      src/h2.o
+  CC      src/filters.o
+  CC      src/server_state.o
+  CC      src/payload.o
+  CC      src/fcgi-app.o
+  CC      src/map.o
+  CC      src/htx.o
+  CC      src/h1.o
+  CC      src/pool.o
+  CC      src/cfgparse-global.o
+  CC      src/trace.o
+  CC      src/tcp_sample.o
+  CC      src/flt_http_comp.o
+  CC      src/mux_pt.o
+  CC      src/flt_trace.o
+  CC      src/mqtt.o
+  CC      src/acl.o
+  CC      src/sock.o
+  CC      src/mworker.o
+  CC      src/tcp_act.o
+  CC      src/ring.o
+  CC      src/session.o
+  CC      src/proto_tcp.o
+  CC      src/fd.o
+  CC      src/channel.o
+  CC      src/activity.o
+  CC      src/queue.o
+  CC      src/lb_fas.o
+  CC      src/http_rules.o
+  CC      src/extcheck.o
+  CC      src/thread.o
+  CC      src/http.o
+  CC      src/lb_chash.o
+  CC      src/applet.o
+  CC      src/compression.o
+  CC      src/raw_sock.o
+  CC      src/ncbuf.o
+  CC      src/frontend.o
+  CC      src/errors.o
+  CC      src/uri_normalizer.o
+  CC      src/http_conv.o
+  CC      src/lb_fwrr.o
+  CC      src/sha1.o
+  CC      src/proto_sockpair.o
+  CC      src/mailers.o
+  CC      src/lb_fwlc.o
+  CC      src/ebmbtree.o
+  CC      src/cfgcond.o
+  CC      src/action.o
+  CC      src/xprt_handshake.o
+  CC      src/protocol.o
+  CC      src/proto_uxst.o
+  CC      src/proto_udp.o
+  CC      src/lb_map.o
+  CC      src/fix.o
+  CC      src/ev_select.o
+  CC      src/arg.o
+  CC      src/sock_inet.o
+  CC      src/mworker-prog.o
+  CC      src/hpack-dec.o
+  CC      src/cfgparse-tcp.o
+  CC      src/sock_unix.o
+  CC      src/shctx.o
+  CC      src/proto_uxdg.o
+  CC      src/fcgi.o
+  CC      src/eb64tree.o
+  CC      src/clock.o
+  CC      src/chunk.o
+  CC      src/cfgdiag.o
+  CC      src/signal.o
+  CC      src/regex.o
+  CC      src/lru.o
+  CC      src/eb32tree.o
+  CC      src/eb32sctree.o
+  CC      src/cfgparse-unix.o
+  CC      src/hpack-tbl.o
+  CC      src/ebsttree.o
+  CC      src/ebimtree.o
+  CC      src/base64.o
+  CC      src/auth.o
+  CC      src/uri_auth.o
+  CC      src/time.o
+  CC      src/ebistree.o
+  CC      src/dynbuf.o
+  CC      src/wdt.o
+  CC      src/pipe.o
+  CC      src/init.o
+  CC      src/http_acl.o
+  CC      src/hpack-huff.o
+  CC      src/hpack-enc.o
+  CC      src/dict.o
+  CC      src/freq_ctr.o
+  CC      src/ebtree.o
+  CC      src/hash.o
+  CC      src/dgram.o
+  CC      src/version.o
+  LD      haproxy
+  CC      dev/flags/flags.o
+  LD      dev/flags/flags
+● haproxy.service - SYSV: HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high availability environments.
+   Loaded: loaded (/etc/rc.d/init.d/haproxy; bad; vendor preset: disabled)
+   Active: active (running) since Fri 2022-10-28 18:45:51 MSK; 9ms ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 2487 ExecStart=/etc/rc.d/init.d/haproxy start (code=exited, status=0/SUCCESS)
+ Main PID: 2498 (haproxy)
+   CGroup: /system.slice/haproxy.service
+           └─2498 /usr/sbin/haproxy -D -f /etc/haproxy/haproxy.cfg -p /var/run/haproxy.pid
+
+Oct 28 18:45:51 localhost.localdomain systemd[1]: Starting SYSV: HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high availability environments....
+Oct 28 18:45:51 localhost.localdomain haproxy[2487]: /etc/rc.d/init.d/haproxy: line 26: [: =: unary operator expected
+Oct 28 18:45:51 localhost.localdomain haproxy[2487]: Starting haproxy: [  OK  ]
+Oct 28 18:45:51 localhost.localdomain systemd[1]: Started SYSV: HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high availability environments..
+success
+success
+success
+● haproxy.service - SYSV: HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high availability environments.
+   Loaded: loaded (/etc/rc.d/init.d/haproxy; bad; vendor preset: disabled)
+   Active: active (running) since Fri 2022-10-28 18:45:51 MSK; 996ms ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 2487 ExecStart=/etc/rc.d/init.d/haproxy start (code=exited, status=0/SUCCESS)
+ Main PID: 2498 (haproxy)
+   CGroup: /system.slice/haproxy.service
+           └─2498 /usr/sbin/haproxy -D -f /etc/haproxy/haproxy.cfg -p /var/run/haproxy.pid
+
+Oct 28 18:45:51 localhost.localdomain systemd[1]: Starting SYSV: HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high availability environments....
+Oct 28 18:45:51 localhost.localdomain haproxy[2487]: /etc/rc.d/init.d/haproxy: line 26: [: =: unary operator expected
+Oct 28 18:45:51 localhost.localdomain haproxy[2487]: Starting haproxy: [  OK  ]
+Oct 28 18:45:51 localhost.localdomain systemd[1]: Started SYSV: HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high availability environments..
+HAProxy version 2.6.6-274d1a4 2022/09/22 - https://haproxy.org/
+Status: long-term supported branch - will stop receiving fixes around Q2 2027.
+Known bugs: http://www.haproxy.org/bugs/bugs-2.6.6.html
+Running on: Linux 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022 x86_64
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.docker.ru
+ * epel: mirror.yandex.ru
+ * extras: mirror.docker.ru
+ * updates: mirror.docker.ru
+No packages marked for update
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.docker.ru
+ * epel: mirror.cloudhosting.lv
+ * extras: mirror.docker.ru
+ * updates: mirror.docker.ru
+Package kernel-headers-3.10.0-1160.76.1.el7.x86_64 already installed and latest version
+Package gcc-4.8.5-44.el7.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package kernel-devel.x86_64 0:3.10.0-1160.76.1.el7 will be installed
+---> Package libnl.x86_64 0:1.1.4-3.el7 will be installed
+---> Package libnl-devel.x86_64 0:1.1.4-3.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+============================================================================================================================================================================================================
+ Package                                           Arch                                        Version                                                   Repository                                    Size
+============================================================================================================================================================================================================
+Installing:
+ kernel-devel                                      x86_64                                      3.10.0-1160.76.1.el7                                      updates                                       18 M
+ libnl                                             x86_64                                      1.1.4-3.el7                                               base                                         128 k
+ libnl-devel                                       x86_64                                      1.1.4-3.el7                                               base                                         621 k
+
+Transaction Summary
+============================================================================================================================================================================================================
+Install  3 Packages
+
+Total download size: 19 M
+Installed size: 47 M
+Downloading packages:
+Delta RPMs disabled because /usr/bin/applydeltarpm not installed.
+(1/3): libnl-1.1.4-3.el7.x86_64.rpm                                                                                                                                                  | 128 kB  00:00:00
+(2/3): libnl-devel-1.1.4-3.el7.x86_64.rpm                                                                                                                                            | 621 kB  00:00:00
+(3/3): kernel-devel-3.10.0-1160.76.1.el7.x86_64.rpm                                                                                                                                  |  18 MB  00:00:03
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                                                       4.8 MB/s |  19 MB  00:00:03
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libnl-1.1.4-3.el7.x86_64                                                                                                                                                                 1/3
+  Installing : libnl-devel-1.1.4-3.el7.x86_64                                                                                                                                                           2/3
+  Installing : kernel-devel-3.10.0-1160.76.1.el7.x86_64                                                                                                                                                 3/3
+  Verifying  : libnl-1.1.4-3.el7.x86_64                                                                                                                                                                 1/3
+  Verifying  : kernel-devel-3.10.0-1160.76.1.el7.x86_64                                                                                                                                                 2/3
+  Verifying  : libnl-devel-1.1.4-3.el7.x86_64                                                                                                                                                           3/3
+
+Installed:
+  kernel-devel.x86_64 0:3.10.0-1160.76.1.el7                                  libnl.x86_64 0:1.1.4-3.el7                                  libnl-devel.x86_64 0:1.1.4-3.el7
+
+Complete!
+--2022-10-28 18:46:35--  https://keepalived.org/software/keepalived-2.2.7.tar.gz
+Resolving keepalived.org (keepalived.org)... 91.121.30.175
+Connecting to keepalived.org (keepalived.org)|91.121.30.175|:443... failed: Connection timed out.
+Retrying.
+
+--2022-10-28 18:48:44--  (try: 2)  https://keepalived.org/software/keepalived-2.2.7.tar.gz
+Connecting to keepalived.org (keepalived.org)|91.121.30.175|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1180180 (1.1M) [application/octet-stream]
+Saving to: ‘keepalived-2.2.7.tar.gz’
+
+100%[==================================================================================================================================================================>] 1,180,180    502KB/s   in 2.3s
+
+2022-10-28 18:48:47 (502 KB/s) - ‘keepalived-2.2.7.tar.gz’ saved [1180180/1180180]
+
+keepalived-2.2.7/
+keepalived-2.2.7/tools/
+keepalived-2.2.7/tools/timed_reload
+keepalived-2.2.7/Dockerfile.in
+keepalived-2.2.7/Makefile.in
+keepalived-2.2.7/build-aux/
+keepalived-2.2.7/build-aux/install-sh
+keepalived-2.2.7/build-aux/missing
+keepalived-2.2.7/build-aux/compile
+keepalived-2.2.7/build-aux/depcomp
+keepalived-2.2.7/build-aux/ar-lib
+keepalived-2.2.7/bin_install/
+keepalived-2.2.7/bin_install/Makefile.in
+keepalived-2.2.7/bin_install/Makefile.am
+keepalived-2.2.7/keepalived.spec.in
+keepalived-2.2.7/snap/
+keepalived-2.2.7/snap/snapcraft.yaml
+keepalived-2.2.7/snap/hooks/
+keepalived-2.2.7/snap/hooks/post-refresh
+keepalived-2.2.7/snap/hooks/install
+keepalived-2.2.7/INSTALL
+keepalived-2.2.7/doc/
+keepalived-2.2.7/doc/Makefile.in
+keepalived-2.2.7/doc/man/
+keepalived-2.2.7/doc/man/man8/
+keepalived-2.2.7/doc/man/man8/Makefile.in
+keepalived-2.2.7/doc/man/man8/Makefile.am
+keepalived-2.2.7/doc/man/man8/keepalived.8.in
+keepalived-2.2.7/doc/man/man8/keepalived.8
+keepalived-2.2.7/doc/man/man1/
+keepalived-2.2.7/doc/man/man1/genhash.1
+keepalived-2.2.7/doc/man/man1/Makefile.in
+keepalived-2.2.7/doc/man/man1/Makefile.am
+keepalived-2.2.7/doc/man/man1/genhash.1.in
+keepalived-2.2.7/doc/man/man5/
+keepalived-2.2.7/doc/man/man5/Makefile.in
+keepalived-2.2.7/doc/man/man5/keepalived.conf.5.in
+keepalived-2.2.7/doc/man/man5/Makefile.am
+keepalived-2.2.7/doc/man/man5/keepalived.conf.5
+keepalived-2.2.7/doc/samples/
+keepalived-2.2.7/doc/samples/keepalived.conf.vrrp.static_ipaddress
+keepalived-2.2.7/doc/samples/keepalived.conf.vrrp.localcheck
+keepalived-2.2.7/doc/samples/keepalived.conf.vrrp.routes
+keepalived-2.2.7/doc/samples/keepalived.conf.sample
+keepalived-2.2.7/doc/samples/keepalived.conf.track_interface
+keepalived-2.2.7/doc/samples/keepalived.conf.status_code
+keepalived-2.2.7/doc/samples/keepalived.conf.virtualhost
+keepalived-2.2.7/doc/samples/keepalived.conf.quorum
+keepalived-2.2.7/doc/samples/keepalived.conf.SMTP_CHECK
+keepalived-2.2.7/doc/samples/keepalived.conf.vrrp.sync
+keepalived-2.2.7/doc/samples/keepalived.conf.vrrp.rules
+keepalived-2.2.7/doc/samples/keepalived.conf.vrrp
+keepalived-2.2.7/doc/samples/keepalived.conf.fwmark
+keepalived-2.2.7/doc/samples/keepalived.conf.vrrp.scripts
+keepalived-2.2.7/doc/samples/sample.misccheck.smbcheck.sh
+keepalived-2.2.7/doc/samples/keepalived.conf.SSL_GET
+keepalived-2.2.7/doc/samples/keepalived.conf.HTTP_GET.port
+keepalived-2.2.7/doc/samples/keepalived.conf.IPv6
+keepalived-2.2.7/doc/samples/keepalived.conf.misc_check
+keepalived-2.2.7/doc/samples/keepalived.conf.vrrp.lvs_syncd
+keepalived-2.2.7/doc/samples/sample_notify_fifo.sh
+keepalived-2.2.7/doc/samples/keepalived.conf.UDP_CHECK
+keepalived-2.2.7/doc/samples/keepalived.conf.conditional_conf
+keepalived-2.2.7/doc/samples/keepalived.conf.inhibit
+keepalived-2.2.7/doc/samples/keepalived.conf.virtual_server_group
+keepalived-2.2.7/doc/samples/keepalived.conf.PING_CHECK
+keepalived-2.2.7/doc/samples/keepalived.conf.misc_check_arg
+keepalived-2.2.7/doc/source/
+keepalived-2.2.7/doc/source/_static/
+keepalived-2.2.7/doc/source/_static/.gitignore
+keepalived-2.2.7/doc/source/_static/.gitkeep
+keepalived-2.2.7/doc/source/tools/
+keepalived-2.2.7/doc/source/tools/pydoctheme/
+keepalived-2.2.7/doc/source/tools/pydoctheme/static/
+keepalived-2.2.7/doc/source/tools/pydoctheme/static/pydoctheme.css
+keepalived-2.2.7/doc/source/tools/pydoctheme/theme.conf
+keepalived-2.2.7/doc/source/installing_keepalived.rst
+keepalived-2.2.7/doc/source/images/
+keepalived-2.2.7/doc/source/images/software_design.png
+keepalived-2.2.7/doc/source/scheduling_algorithms.rst
+keepalived-2.2.7/doc/source/load_balancing_techniques.rst
+keepalived-2.2.7/doc/source/_templates/
+keepalived-2.2.7/doc/source/_templates/.gitignore
+keepalived-2.2.7/doc/source/_templates/.gitkeep
+keepalived-2.2.7/doc/source/case_study_failover.rst
+keepalived-2.2.7/doc/source/license.rst
+keepalived-2.2.7/doc/source/configuration_synopsis.rst
+keepalived-2.2.7/doc/source/conf.py
+keepalived-2.2.7/doc/source/snmp_support.rst
+keepalived-2.2.7/doc/source/protocol_support.rst
+keepalived-2.2.7/doc/source/terminology.rst
+keepalived-2.2.7/doc/source/software_design.rst
+keepalived-2.2.7/doc/source/about.rst
+keepalived-2.2.7/doc/source/todo.rst
+keepalived-2.2.7/doc/source/case_study_healthcheck.rst
+keepalived-2.2.7/doc/source/introduction.rst
+keepalived-2.2.7/doc/source/index.rst
+keepalived-2.2.7/doc/source/programs_synopsis.rst
+keepalived-2.2.7/doc/source/case_study_mixing.rst
+keepalived-2.2.7/doc/VRRP-MIB.txt
+keepalived-2.2.7/doc/Makefile.am
+keepalived-2.2.7/doc/NOTE_vrrp_vmac.txt
+keepalived-2.2.7/doc/KEEPALIVED-MIB.txt
+keepalived-2.2.7/doc/keepalived.conf.SYNOPSIS
+keepalived-2.2.7/doc/VRRPv3-MIB.txt
+keepalived-2.2.7/configure
+keepalived-2.2.7/AUTHOR
+keepalived-2.2.7/m4/
+keepalived-2.2.7/m4/pkg.m4
+keepalived-2.2.7/m4/as-ac-expand.m4
+keepalived-2.2.7/Makefile.am
+keepalived-2.2.7/COPYING
+keepalived-2.2.7/README.md
+keepalived-2.2.7/autogen.sh
+keepalived-2.2.7/build_setup
+keepalived-2.2.7/CONTRIBUTORS
+keepalived-2.2.7/lib/
+keepalived-2.2.7/lib/html.c
+keepalived-2.2.7/lib/list_head.c
+keepalived-2.2.7/lib/memory.h
+keepalived-2.2.7/lib/rbtree.c
+keepalived-2.2.7/lib/rbtree_types.h
+keepalived-2.2.7/lib/Makefile.in
+keepalived-2.2.7/lib/signals.h
+keepalived-2.2.7/lib/logger.h
+keepalived-2.2.7/lib/process.h
+keepalived-2.2.7/lib/notify.c
+keepalived-2.2.7/lib/rbtree_ka.h
+keepalived-2.2.7/lib/list_head.h
+keepalived-2.2.7/lib/timer.c
+keepalived-2.2.7/lib/bitops.h
+keepalived-2.2.7/lib/align.h
+keepalived-2.2.7/lib/config_warnings.h.in
+keepalived-2.2.7/lib/logger.c
+keepalived-2.2.7/lib/config.h.in
+keepalived-2.2.7/lib/json_writer.c
+keepalived-2.2.7/lib/Makefile.am
+keepalived-2.2.7/lib/json_writer.h
+keepalived-2.2.7/lib/warnings.h
+keepalived-2.2.7/lib/container.h
+keepalived-2.2.7/lib/process.c
+keepalived-2.2.7/lib/signals.c
+keepalived-2.2.7/lib/html.h
+keepalived-2.2.7/lib/rbtree_augmented.h
+keepalived-2.2.7/lib/keepalived_magic.h
+keepalived-2.2.7/lib/parser.h
+keepalived-2.2.7/lib/scheduler.c
+keepalived-2.2.7/lib/parser.c
+keepalived-2.2.7/lib/assert.c
+keepalived-2.2.7/lib/systemd.h
+keepalived-2.2.7/lib/assert_debug.h
+keepalived-2.2.7/lib/memory.c
+keepalived-2.2.7/lib/vector.c
+keepalived-2.2.7/lib/rbtree.h
+keepalived-2.2.7/lib/systemd.c
+keepalived-2.2.7/lib/utils.h
+keepalived-2.2.7/lib/rttables.c
+keepalived-2.2.7/lib/notify.h
+keepalived-2.2.7/lib/vector.h
+keepalived-2.2.7/lib/scheduler.h
+keepalived-2.2.7/lib/sockaddr.h
+keepalived-2.2.7/lib/rttables.h
+keepalived-2.2.7/lib/utils.c
+keepalived-2.2.7/lib/git-commit.h
+keepalived-2.2.7/lib/timer.h
+keepalived-2.2.7/TODO
+keepalived-2.2.7/ChangeLog
+keepalived-2.2.7/keepalived/
+keepalived-2.2.7/keepalived/vrrp/
+keepalived-2.2.7/keepalived/vrrp/vrrp_sync.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_data.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_firewall.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_nftables.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_if.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_scheduler.c
+keepalived-2.2.7/keepalived/vrrp/Makefile.in
+keepalived-2.2.7/keepalived/vrrp/vrrp_iptables.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_dbus.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_track.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_iptables_calls.c
+keepalived-2.2.7/keepalived/vrrp/vrrp.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_json.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_ndisc.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_ipaddress.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_iprule.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_static_track.c
+keepalived-2.2.7/keepalived/vrrp/Makefile.am
+keepalived-2.2.7/keepalived/vrrp/vrrp_snmp.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_parser.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_print.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_iproute.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_daemon.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_notify.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_arp.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_if_config.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_ipset.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_ip_rule_route_parser.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_vmac.c
+keepalived-2.2.7/keepalived/vrrp/vrrp_ipsecah.c
+keepalived-2.2.7/keepalived/Makefile.in
+keepalived-2.2.7/keepalived/dbus/
+keepalived-2.2.7/keepalived/dbus/org.keepalived.Vrrp1.Instance.xml
+keepalived-2.2.7/keepalived/dbus/Makefile.in
+keepalived-2.2.7/keepalived/dbus/Makefile.am
+keepalived-2.2.7/keepalived/dbus/org.keepalived.Vrrp1.Vrrp.xml_template
+keepalived-2.2.7/keepalived/dbus/org.keepalived.Vrrp1.conf
+keepalived-2.2.7/keepalived/bfd/
+keepalived-2.2.7/keepalived/bfd/bfd_daemon.c
+keepalived-2.2.7/keepalived/bfd/bfd_event.c
+keepalived-2.2.7/keepalived/bfd/bfd.c
+keepalived-2.2.7/keepalived/bfd/Makefile.in
+keepalived-2.2.7/keepalived/bfd/Makefile.am
+keepalived-2.2.7/keepalived/bfd/bfd_data.c
+keepalived-2.2.7/keepalived/bfd/bfd_scheduler.c
+keepalived-2.2.7/keepalived/bfd/bfd_parser.c
+keepalived-2.2.7/keepalived/include/
+keepalived-2.2.7/keepalived/include/global_data.h
+keepalived-2.2.7/keepalived/include/global_parser.h
+keepalived-2.2.7/keepalived/include/vrrp_scheduler.h
+keepalived-2.2.7/keepalived/include/check_genhash.h
+keepalived-2.2.7/keepalived/include/vrrp_ipset.h
+keepalived-2.2.7/keepalived/include/tracker.h
+keepalived-2.2.7/keepalived/include/bfd_daemon.h
+keepalived-2.2.7/keepalived/include/vrrp_parser.h
+keepalived-2.2.7/keepalived/include/vrrp_firewall.h
+keepalived-2.2.7/keepalived/include/vrrp_data.h
+keepalived-2.2.7/keepalived/include/vrrp_ipaddress.h
+keepalived-2.2.7/keepalived/include/keepalived_netlink.h
+keepalived-2.2.7/keepalived/include/check_api.h
+keepalived-2.2.7/keepalived/include/vrrp_arp.h
+keepalived-2.2.7/keepalived/include/vrrp_nftables.h
+keepalived-2.2.7/keepalived/include/namespaces.h
+keepalived-2.2.7/keepalived/include/nftables.h
+keepalived-2.2.7/keepalived/include/bfd_data.h
+keepalived-2.2.7/keepalived/include/check_smtp.h
+keepalived-2.2.7/keepalived/include/bfd.h
+keepalived-2.2.7/keepalived/include/check_http.h
+keepalived-2.2.7/keepalived/include/vrrp_notify.h
+keepalived-2.2.7/keepalived/include/check_udp.h
+keepalived-2.2.7/keepalived/include/vrrp_json.h
+keepalived-2.2.7/keepalived/include/config_notify.h
+keepalived-2.2.7/keepalived/include/track_process.h
+keepalived-2.2.7/keepalived/include/ipwrapper.h
+keepalived-2.2.7/keepalived/include/vrrp_if_config.h
+keepalived-2.2.7/keepalived/include/libnl_link.h
+keepalived-2.2.7/keepalived/include/check_nftables.h
+keepalived-2.2.7/keepalived/include/vrrp_if.h
+keepalived-2.2.7/keepalived/include/snmp.h
+keepalived-2.2.7/keepalived/include/check_data.h
+keepalived-2.2.7/keepalived/include/bfd_parser.h
+keepalived-2.2.7/keepalived/include/vrrp_iprule.h
+keepalived-2.2.7/keepalived/include/check_snmp.h
+keepalived-2.2.7/keepalived/include/vrrp_ip_rule_route_parser.h
+keepalived-2.2.7/keepalived/include/vrrp_sock.h
+keepalived-2.2.7/keepalived/include/layer4.h
+keepalived-2.2.7/keepalived/include/libipvs.h
+keepalived-2.2.7/keepalived/include/track_file.h
+keepalived-2.2.7/keepalived/include/vrrp_iptables_calls.h
+keepalived-2.2.7/keepalived/include/check_dns.h
+keepalived-2.2.7/keepalived/include/check_ssl.h
+keepalived-2.2.7/keepalived/include/vrrp_iptables.h
+keepalived-2.2.7/keepalived/include/ip_vs.h
+keepalived-2.2.7/keepalived/include/check_misc.h
+keepalived-2.2.7/keepalived/include/vrrp_track.h
+keepalived-2.2.7/keepalived/include/vrrp_sync.h
+keepalived-2.2.7/keepalived/include/bfd_scheduler.h
+keepalived-2.2.7/keepalived/include/check_bfd.h
+keepalived-2.2.7/keepalived/include/daemon.h
+keepalived-2.2.7/keepalived/include/check_ping.h
+keepalived-2.2.7/keepalived/include/bfd_event.h
+keepalived-2.2.7/keepalived/include/vrrp_iproute.h
+keepalived-2.2.7/keepalived/include/vrrp_ipsecah.h
+keepalived-2.2.7/keepalived/include/main.h
+keepalived-2.2.7/keepalived/include/check_file.h
+keepalived-2.2.7/keepalived/include/smtp.h
+keepalived-2.2.7/keepalived/include/vrrp_static_track.h
+keepalived-2.2.7/keepalived/include/vrrp_snmp.h
+keepalived-2.2.7/keepalived/include/vrrp_daemon.h
+keepalived-2.2.7/keepalived/include/vrrp_print.h
+keepalived-2.2.7/keepalived/include/vrrp_vmac.h
+keepalived-2.2.7/keepalived/include/check_parser.h
+keepalived-2.2.7/keepalived/include/vrrp.h
+keepalived-2.2.7/keepalived/include/ipvswrapper.h
+keepalived-2.2.7/keepalived/include/vrrp_dbus.h
+keepalived-2.2.7/keepalived/include/check_tcp.h
+keepalived-2.2.7/keepalived/include/reload_monitor.h
+keepalived-2.2.7/keepalived/include/check_print.h
+keepalived-2.2.7/keepalived/include/pidfile.h
+keepalived-2.2.7/keepalived/include/vrrp_ndisc.h
+keepalived-2.2.7/keepalived/include/check_daemon.h
+keepalived-2.2.7/keepalived/Makefile.am
+keepalived-2.2.7/keepalived/keepalived-non-root.service.in
+keepalived-2.2.7/keepalived/trackers/
+keepalived-2.2.7/keepalived/trackers/Makefile.in
+keepalived-2.2.7/keepalived/trackers/Makefile.am
+keepalived-2.2.7/keepalived/trackers/track_file.c
+keepalived-2.2.7/keepalived/keepalived.service.in
+keepalived-2.2.7/keepalived/etc/
+keepalived-2.2.7/keepalived/etc/init/
+keepalived-2.2.7/keepalived/etc/init/keepalived.conf.in
+keepalived-2.2.7/keepalived/etc/init/Makefile.in
+keepalived-2.2.7/keepalived/etc/init/Makefile.am
+keepalived-2.2.7/keepalived/etc/Makefile.in
+keepalived-2.2.7/keepalived/etc/sysconfig/
+keepalived-2.2.7/keepalived/etc/sysconfig/Makefile.in
+keepalived-2.2.7/keepalived/etc/sysconfig/keepalived.in
+keepalived-2.2.7/keepalived/etc/sysconfig/.gitignore
+keepalived-2.2.7/keepalived/etc/sysconfig/Makefile.am
+keepalived-2.2.7/keepalived/etc/sysconfig/Makefile
+keepalived-2.2.7/keepalived/etc/openrc/
+keepalived-2.2.7/keepalived/etc/openrc/keepalived
+keepalived-2.2.7/keepalived/etc/Makefile.am
+keepalived-2.2.7/keepalived/etc/keepalived/
+keepalived-2.2.7/keepalived/etc/keepalived/Makefile.in
+keepalived-2.2.7/keepalived/etc/keepalived/Makefile.am
+keepalived-2.2.7/keepalived/etc/keepalived/keepalived.conf.sample.in
+keepalived-2.2.7/keepalived/etc/init.d/
+keepalived-2.2.7/keepalived/etc/init.d/Makefile.in
+keepalived-2.2.7/keepalived/etc/init.d/Makefile.am
+keepalived-2.2.7/keepalived/etc/init.d/keepalived
+keepalived-2.2.7/keepalived/etc/init.d/keepalived.suse.init.in
+keepalived-2.2.7/keepalived/main.c
+keepalived-2.2.7/keepalived/core/
+keepalived-2.2.7/keepalived/core/smtp.c
+keepalived-2.2.7/keepalived/core/Makefile.in
+keepalived-2.2.7/keepalived/core/snmp.c
+keepalived-2.2.7/keepalived/core/keepalived_netlink.c
+keepalived-2.2.7/keepalived/core/layer4.c
+keepalived-2.2.7/keepalived/core/nftables.c
+keepalived-2.2.7/keepalived/core/Makefile.am
+keepalived-2.2.7/keepalived/core/global_parser.c
+keepalived-2.2.7/keepalived/core/global_data.c
+keepalived-2.2.7/keepalived/core/track_process.c
+keepalived-2.2.7/keepalived/core/pidfile.c
+keepalived-2.2.7/keepalived/core/libnl_link.c
+keepalived-2.2.7/keepalived/core/main.c
+keepalived-2.2.7/keepalived/core/namespaces.c
+keepalived-2.2.7/keepalived/core/config_notify.c
+keepalived-2.2.7/keepalived/core/daemon.c
+keepalived-2.2.7/keepalived/core/reload_monitor.c
+keepalived-2.2.7/keepalived/check/
+keepalived-2.2.7/keepalived/check/check_daemon.c
+keepalived-2.2.7/keepalived/check/check_print.c
+keepalived-2.2.7/keepalived/check/check_ping.c
+keepalived-2.2.7/keepalived/check/check_data.c
+keepalived-2.2.7/keepalived/check/Makefile.in
+keepalived-2.2.7/keepalived/check/check_bfd.c
+keepalived-2.2.7/keepalived/check/check_ssl.c
+keepalived-2.2.7/keepalived/check/check_misc.c
+keepalived-2.2.7/keepalived/check/check_nftables.c
+keepalived-2.2.7/keepalived/check/check_api.c
+keepalived-2.2.7/keepalived/check/Makefile.am
+keepalived-2.2.7/keepalived/check/check_udp.c
+keepalived-2.2.7/keepalived/check/check_smtp.c
+keepalived-2.2.7/keepalived/check/ipwrapper.c
+keepalived-2.2.7/keepalived/check/check_genhash.c
+keepalived-2.2.7/keepalived/check/check_parser.c
+keepalived-2.2.7/keepalived/check/check_snmp.c
+keepalived-2.2.7/keepalived/check/check_http.c
+keepalived-2.2.7/keepalived/check/ipvswrapper.c
+keepalived-2.2.7/keepalived/check/check_dns.c
+keepalived-2.2.7/keepalived/check/check_file.c
+keepalived-2.2.7/keepalived/check/check_tcp.c
+keepalived-2.2.7/keepalived/check/libipvs.c
+keepalived-2.2.7/configure.ac
+keepalived-2.2.7/aclocal.m4
+checking for a BSD-compatible install... /bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking for pkg-config... /bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables...
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking whether make sets $(MAKE)... (cached) yes
+checking for ranlib... ranlib
+checking for grep that handles long lines and -e... /bin/grep
+checking whether ln -s works... yes
+checking for a sed that does not truncate output... /bin/sed
+checking for strip... strip
+checking for ldd... ldd
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking if using GCC Link Time Optimisation... no
+checking msghdr.msg_controllen is size_t... yes
+checking diagnostic pragmas in functions... yes
+checking diagnostic push/pop pragmas... yes
+checking for -Wall... no
+checking for -Wextra... yes
+checking for -Wunused... yes
+checking for -Wstrict-prototypes... yes
+checking for -Wabi... yes
+checking for -Wabsolute-value... no
+checking for -Waddress-of-packed-member... no
+checking for -Walloca... no
+checking for -Walloc-larger-than=4096... no
+checking for -Walloc-zero... no
+checking for -Warith-conversion... no
+checking for -Warray-bounds=2... no
+checking for -Wattribute-alias=2... no
+checking for -Wbad-function-cast... yes
+checking for -Wc11-c2x-compat... no
+checking for -Wcast-align... yes
+checking for -Wcast-qual... yes
+checking for -Wchkp... no
+checking for -Wdate-time... no
+checking for -Wdisabled-optimization... yes
+checking for -Wdouble-promotion... yes
+checking for -Wduplicated-branches... no
+checking for -Wduplicated-cond... no
+checking for -Wfloat-conversion... no
+checking for -Wfloat-equal... yes
+checking for -Wformat-overflow... no
+checking for -Wformat-security... no
+checking for -Wformat-signedness... no
+checking for -Wformat-truncation... no
+checking for -Wframe-larger-than=5120... yes
+checking for -Wimplicit-fallthrough=3... no
+checking for -Winit-self... yes
+checking for -Winline... yes
+checking for -Winvalid-pch... yes
+checking for -Wjump-misses-init... yes
+checking for -Wlogical-op... yes
+checking for -Wmissing-declarations... yes
+checking for -Wmissing-field-initializers... yes
+checking for -Wmissing-include-dirs... yes
+checking for -Wmissing-prototypes... yes
+checking for -Wnested-externs... yes
+checking for -Wnormalized... no
+checking for -Wnull-dereference... no
+checking for -Wold-style-definition... yes
+checking for -Woverlength-strings... yes
+checking for -Wpointer-arith... yes
+checking for -Wredundant-decls... yes
+checking for -Wshadow... yes
+checking for -Wshift-overflow=2... no
+checking for -Wstack-protector... yes
+checking for -Wstrict-overflow=4... yes
+checking for -Wstringop-overflow=2... no
+checking for -Wstringop-truncation... no
+checking for -Wsuggest-attribute=cold... no
+checking for -Wsuggest-attribute=const... no
+checking for -Wsuggest-attribute=format... yes
+checking for -Wsuggest-attribute=malloc... no
+checking for -Wsuggest-attribute=noreturn... yes
+checking for -Wsuggest-attribute=pure... yes
+checking for -Wsync-nand... yes
+checking for -Wtrampolines... yes
+checking for -Wundef... yes
+checking for -Wuninitialized... yes
+checking for -Wunknown-pragmas... yes
+checking for -Wunsafe-loop-optimizations... yes
+checking for -Wunsuffixed-float-constants... yes
+checking for -Wunused-const-variable=2... no
+checking for -Wunused-macros... no
+checking for -Wvariadic-macros... yes
+checking for -Wwrite-strings... yes
+checking for function __attribute__((error(msg))) support... yes
+checking for PIE support... yes
+checking for -Wformat -Werror=format-security support... yes
+checking for -Wp,-D_FORTIFY_SOURCE=2 support... yes
+checking for -fexceptions support... yes
+checking for -fstack-protector-strong support... yes
+checking for --param=ssp-buffer-size=4 support... yes
+checking for -grecord-gcc-switches support... yes
+checking for -Wl,-z,relro support... yes
+checking for -Wl,-z,now support... yes
+checking for -O2 support... yes
+checking for unaligned memory access... yes
+checking for unaligned memory access causes warnings... no
+checking for clock_gettime() requires -lrt... no
+checking how to run the C preprocessor... gcc -E
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking arpa/inet.h usability... yes
+checking arpa/inet.h presence... yes
+checking for arpa/inet.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking for stdint.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/param.h usability... yes
+checking sys/param.h presence... yes
+checking for sys/param.h... yes
+checking sys/prctl.h usability... yes
+checking sys/prctl.h presence... yes
+checking for sys/prctl.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking syslog.h usability... yes
+checking syslog.h presence... yes
+checking for syslog.h... yes
+checking for unistd.h... (cached) yes
+checking linux/errqueue.h needs sys/time.h... no
+checking asm/types.h usability... yes
+checking asm/types.h presence... yes
+checking for asm/types.h... yes
+checking linux/ethtool.h usability... yes
+checking linux/ethtool.h presence... yes
+checking for linux/ethtool.h... yes
+checking linux/icmpv6.h usability... yes
+checking linux/icmpv6.h presence... yes
+checking for linux/icmpv6.h... yes
+checking linux/if_ether.h usability... yes
+checking linux/if_ether.h presence... yes
+checking for linux/if_ether.h... yes
+checking linux/if_packet.h usability... yes
+checking linux/if_packet.h presence... yes
+checking for linux/if_packet.h... yes
+checking linux/ip.h usability... yes
+checking linux/ip.h presence... yes
+checking for linux/ip.h... yes
+checking linux/sockios.h usability... yes
+checking linux/sockios.h presence... yes
+checking for linux/sockios.h... yes
+checking linux/types.h usability... yes
+checking linux/types.h presence... yes
+checking for linux/types.h... yes
+checking for linux/fib_rules.h... yes
+checking for linux/if_addr.h... yes
+checking for linux/if_link.h... yes
+checking for linux/if_arp.h... yes
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for inline... inline
+checking for int64_t... yes
+checking for pid_t... yes
+checking for size_t... yes
+checking for uint16_t... yes
+checking for uint32_t... yes
+checking for uint64_t... yes
+checking for uint8_t... yes
+checking for an ANSI C-conforming const... yes
+checking vfork.h usability... no
+checking vfork.h presence... no
+checking for vfork.h... no
+checking for fork... yes
+checking for vfork... yes
+checking for working fork... yes
+checking for working vfork... (cached) yes
+checking for dup2... yes
+checking for dup3... yes
+checking for getcwd... yes
+checking for gettimeofday... yes
+checking for malloc... yes
+checking for memmove... yes
+checking for memset... yes
+checking for realloc... yes
+checking for select... yes
+checking for setenv... yes
+checking for socket... yes
+checking for strcasecmp... yes
+checking for strchr... yes
+checking for strdup... yes
+checking for strerror... yes
+checking for strpbrk... yes
+checking for strstr... yes
+checking for strtol... yes
+checking for strtoul... yes
+checking for uname... yes
+checking for vsyslog... yes
+checking for memfd_create... no
+checking whether __NR_memfd_create is declared... yes
+checking whether O_TMPFILE is declared... yes
+checking whether ETHERTYPE_IPV6 is declared... yes
+checking whether IPV6_MULTICAST_ALL is declared... no
+checking openssl/ssl.h usability... yes
+checking openssl/ssl.h presence... yes
+checking for openssl/ssl.h... yes
+checking openssl/err.h usability... yes
+checking openssl/err.h presence... yes
+checking for openssl/err.h... yes
+checking openssl/md5.h usability... yes
+checking openssl/md5.h presence... yes
+checking for openssl/md5.h... yes
+checking openssl/evp.h usability... yes
+checking openssl/evp.h presence... yes
+checking for openssl/evp.h... yes
+checking for EVP_DigestInit_ex in -lcrypto... yes
+checking for EVP_MD_CTX_new in -lcrypto... no
+checking for SSL_CTX_new in -lssl... yes
+checking SSL_set_tlsext_host_name() - may be a definition... yes
+checking for SSL_CTX_set_verify_depth... yes
+checking for SSL_set0_rbio... no
+checking for OPENSSL_init_crypto... no
+checking for TLS_method... no
+checking whether IPV4_DEVCONF_ARP_IGNORE is declared... no
+checking whether IPV4_DEVCONF_ACCEPT_LOCAL is declared... no
+checking whether IPV4_DEVCONF_RP_FILTER is declared... no
+checking whether IPV4_DEVCONF_ARPFILTER is declared... no
+checking for linux/rtnetlink.h... yes
+checking for nl_socket_modify_cb in -lnl... yes
+checking netlink/netlink.h usability... yes
+checking netlink/netlink.h presence... yes
+checking for netlink/netlink.h... yes
+checking netlink/genl/ctrl.h usability... yes
+checking netlink/genl/ctrl.h presence... yes
+checking for netlink/genl/ctrl.h... yes
+checking netlink/genl/genl.h usability... yes
+checking netlink/genl/genl.h presence... yes
+checking for netlink/genl/genl.h... yes
+checking for magic_open in -lmagic... no
+checking whether RTA_ENCAP is declared... yes
+checking whether RTA_EXPIRES is declared... yes
+checking whether RTA_NEWDST is declared... no
+checking whether RTA_PREF is declared... yes
+checking whether FRA_SUPPRESS_PREFIXLEN is declared... yes
+checking whether FRA_SUPPRESS_IFGROUP is declared... no
+checking whether FRA_TUN_ID is declared... yes
+checking whether RTAX_CC_ALGO is declared... yes
+checking whether RTAX_QUICKACK is declared... yes
+checking whether RTEXT_FILTER_SKIP_STATS is declared... no
+checking whether FRA_L3MDEV is declared... no
+checking whether FRA_UID_RANGE is declared... no
+checking whether RTAX_FASTOPEN_NO_COOKIE is declared... no
+checking whether RTA_VIA is declared... yes
+checking whether FRA_PROTOCOL is declared... no
+checking whether FRA_IP_PROTO is declared... no
+checking whether FRA_SPORT_RANGE is declared... no
+checking whether FRA_DPORT_RANGE is declared... no
+checking whether RTA_TTL_PROPAGATE is declared... no
+checking whether IFA_FLAGS is declared... yes
+checking whether LWTUNNEL_ENCAP_MPLS is declared... no
+checking whether LWTUNNEL_ENCAP_ILA is declared... no
+checking libiptc/libip6tc.h usability... no
+checking libiptc/libip6tc.h presence... no
+checking for libiptc/libip6tc.h... no
+checking whether NFTA_TABLE_MAX is declared... yes
+configure: WARNING: libnftnl missing
+configure: WARNING: libmnl missing
+checking for linux/if.h and net/if.h namespace collision... yes
+checking for linux/if_ether.h then netinet/in.h then linux/if.h namespace collision... no
+checking for linux/if_ether.h then netinet/if_ether.h namespace collision... no
+checking for libiptc/libiptc.h linux/if.h and net/if.h namespace collision... yes
+checking whether IPVS_DEST_ATTR_ADDR_FAMILY is declared... no
+checking whether IPVS_DAEMON_ATTR_SYNC_MAXLEN is declared... yes
+checking whether IPVS_DAEMON_ATTR_MCAST_GROUP is declared... no
+checking whether IPVS_DAEMON_ATTR_MCAST_GROUP6 is declared... no
+checking whether IPVS_DAEMON_ATTR_MCAST_PORT is declared... no
+checking whether IPVS_DAEMON_ATTR_MCAST_TTL is declared... no
+checking whether IPVS_SVC_ATTR_STATS64 is declared... no
+checking whether IPVS_DEST_ATTR_STATS64 is declared... no
+checking whether IPVS_DEST_ATTR_TUN_TYPE is declared... no
+checking whether IP_VS_TUNNEL_ENCAP_FLAG_NOCSUM is declared... no
+checking whether IP_VS_CONN_F_TUNNEL_TYPE_GRE is declared... no
+checking whether IFLA_IPVLAN_MODE is declared... no
+checking whether GLOB_BRACE is declared... yes
+checking whether GLOB_ALTDIRFUNC is declared... yes
+checking for timegm()... yes
+checking whether IFLA_INET6_ADDR_GEN_MODE is declared... yes
+checking whether IFLA_VRF_MAX is declared... no
+checking whether SO_MARK is declared... yes
+checking for sphinx-build... No
+checking for rpm... Yes
+checking for rpmbuild... Yes
+
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating keepalived/Makefile
+config.status: creating lib/Makefile
+config.status: creating keepalived/core/Makefile
+config.status: creating keepalived.spec
+config.status: creating Dockerfile
+config.status: creating keepalived/check/Makefile
+config.status: creating keepalived/vrrp/Makefile
+config.status: creating keepalived/bfd/Makefile
+config.status: creating doc/Makefile
+config.status: creating bin_install/Makefile
+config.status: creating keepalived/dbus/Makefile
+config.status: creating keepalived/etc/Makefile
+config.status: creating keepalived/etc/init/Makefile
+config.status: creating keepalived/etc/init.d/Makefile
+config.status: creating keepalived/etc/sysconfig/Makefile
+config.status: creating keepalived/etc/keepalived/Makefile
+config.status: creating keepalived/trackers/Makefile
+config.status: creating doc/man/man8/Makefile
+config.status: creating doc/man/man5/Makefile
+config.status: creating doc/man/man1/Makefile
+config.status: creating lib/config.h
+config.status: creating lib/config_warnings.h
+config.status: executing depfiles commands
+
+Keepalived configuration
+------------------------
+Keepalived version       : 2.2.7
+Compiler                 : gcc gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)
+Preprocessor flags       : -D_GNU_SOURCE
+Compiler flags           : -g -g -O2 -Wextra -Wunused -Wstrict-prototypes -Wabi -Wbad-function-cast -Wcast-align -Wcast-qual -Wdisabled-optimization -Wdouble-promotion -Wfloat-equal -Wframe-larger-than=5120 -Winit-self -Winline -Winvalid-pch -Wjump-misses-init -Wlogical-op -Wmissing-declarations -Wmissing-field-initializers -Wmissing-include-dirs -Wmissing-prototypes -Wnested-externs -Wold-style-definition -Woverlength-strings -Wpointer-arith -Wredundant-decls -Wshadow -Wstack-protector -Wstrict-overflow=4 -Wsuggest-attribute=format -Wsuggest-attribute=noreturn -Wsuggest-attribute=pure -Wsync-nand -Wtrampolines -Wundef -Wuninitialized -Wunknown-pragmas -Wunsafe-loop-optimizations -Wunsuffixed-float-constants -Wvariadic-macros -Wwrite-strings -fPIE -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -O2
+Linker flags             : -pie -Wl,-z,relro -Wl,-z,now
+Extra Lib                : -lm -lcrypto -lssl -lnl
+Use IPVS Framework       : Yes
+IPVS use libnl           : Yes
+IPVS syncd attributes    : No
+IPVS 64 bit stats        : No
+HTTP_GET regex support   : No
+fwmark socket support    : Yes
+Use VRRP Framework       : Yes
+Use VRRP VMAC            : Yes
+Use VRRP authentication  : Yes
+With track_process       : Yes
+With linkbeat            : Yes
+Use BFD Framework        : No
+SNMP vrrp support        : No
+SNMP checker support     : No
+SNMP RFCv2 support       : No
+SNMP RFCv3 support       : No
+DBUS support             : No
+Use JSON output          : No
+libnl version            : 1
+Use IPv4 devconf         : No
+Use iptables             : No
+Use nftables             : No
+init type                : systemd
+systemd notify           : No
+Strict config checks     : No
+Build documentation      : No
+Default runtime options  : -D
+Making all in lib
+make[1]: Entering directory `/usr/src/keepalived-2.2.7/lib'
+make  all-am
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/lib'
+  CC       memory.o
+  CC       utils.o
+utils.c: In function ‘inet_ntop2’:
+utils.c:428:36: warning: initialization from incompatible pointer type [enabled by default]
+  const unsigned char (*bytep)[4] = (unsigned char (*)[4])&ip;
+                                    ^
+utils.c: In function ‘dump_buffer’:
+utils.c:106:5: warning: cannot optimize possibly infinite loops [-Wunsafe-loop-optimizations]
+     for (j = i - 15; j <= i; j++)
+     ^
+  CC       notify.o
+  CC       timer.o
+  CC       scheduler.o
+  CC       vector.o
+  CC       html.o
+  CC       parser.o
+  CC       signals.o
+  CC       logger.o
+  CC       list_head.o
+  CC       rbtree.o
+  CC       process.o
+  CC       json_writer.o
+  CC       rttables.o
+rttables.c:57:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_LOCAL, "local", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:58:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_NAT, "nat", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:59:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_BROADCAST, "broadcast", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:60:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_BROADCAST, "brd", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:61:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_ANYCAST, "anycast", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:62:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_MULTICAST, "multicast", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:63:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_PROHIBIT, "prohibit", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:64:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_UNREACHABLE, "unreachable", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:65:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_BLACKHOLE, "blackhole", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:66:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_XRESOLVE, "xresolve", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:67:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_UNICAST, "unicast", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:68:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTN_THROW, "throw", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:69:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { 0, NULL, {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:73:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_UNSPEC, "none", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:74:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_REDIRECT, "redirect", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:75:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_KERNEL, "kernel", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:76:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_BOOT, "boot", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:77:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_STATIC, "static", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:79:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_GATED, "gated", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:80:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_RA, "ra", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:81:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_MRT, "mrt", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:82:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_ZEBRA, "zebra", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:83:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_BIRD, "bird", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:87:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_DNROUTED, "dnrouted", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:88:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_XORP, "xorp", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:89:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_NTK, "ntk", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:90:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RTPROT_DHCP, "dhcp", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:91:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { 0, NULL, {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:95:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RT_TABLE_DEFAULT, "default", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:96:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RT_TABLE_MAIN, "main", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:97:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RT_TABLE_LOCAL, "local", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:98:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { 0, NULL, {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:102:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RT_SCOPE_UNIVERSE, "global", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:103:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RT_SCOPE_NOWHERE, "nowhere", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:104:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RT_SCOPE_HOST, "host", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:105:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RT_SCOPE_LINK, "link", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:106:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { RT_SCOPE_SITE, "site", {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+rttables.c:107:2: warning: missing initializer for field ‘next’ of ‘list_head_t’ [-Wmissing-field-initializers]
+  { 0, NULL, {}},
+  ^
+In file included from rttables.c:31:0:
+list_head.h:49:20: note: ‘next’ declared here
+  struct list_head *next, *prev;
+                    ^
+  AR       liblib.a
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/lib'
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7/lib'
+Making all in keepalived
+make[1]: Entering directory `/usr/src/keepalived-2.2.7/keepalived'
+Making all in core
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/core'
+  CC       main.o
+main.c: In function ‘sigend’:
+main.c:1212:34: warning: assuming signed overflow does not occur when simplifying conditional to constant [-Wstrict-overflow]
+   for (i = 0; i < NUM_CHILD_TERM && wait_count; i++) {
+                                  ^
+main.c:1234:6: warning: assuming signed overflow does not occur when simplifying conditional to constant [-Wstrict-overflow]
+   if (wait_count) {
+      ^
+main.c:1171:8: warning: assuming signed overflow does not occur when simplifying conditional to constant [-Wstrict-overflow]
+  while (wait_count) {
+        ^
+  CC       daemon.o
+  CC       pidfile.o
+  CC       layer4.o
+  CC       smtp.o
+  CC       global_data.o
+  CC       global_parser.o
+  CC       keepalived_netlink.o
+  CC       namespaces.o
+  CC       track_process.o
+  CC       reload_monitor.o
+  CC       config_notify.o
+  AR       libcore.a
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/core'
+Making all in vrrp
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/vrrp'
+  CC       vrrp_daemon.o
+  CC       vrrp_print.o
+  CC       vrrp_data.o
+  CC       vrrp_parser.o
+  CC       vrrp.o
+  CC       vrrp_notify.o
+  CC       vrrp_scheduler.o
+vrrp_scheduler.c: In function ‘try_up_instance’:
+vrrp_scheduler.c:675:2: warning: missing initializer for field ‘ifa’ of ‘ip_address_t’ [-Wmissing-field-initializers]
+  ip_address_t ip_addr = {};
+  ^
+In file included from ../../keepalived/include/vrrp_arp.h:34:0,
+                 from vrrp_scheduler.c:43:
+../../keepalived/include/vrrp_ipaddress.h:44:19: note: ‘ifa’ declared here
+  struct ifaddrmsg ifa;
+                   ^
+  CC       vrrp_sync.o
+  CC       vrrp_arp.o
+  CC       vrrp_if.o
+vrrp_if.c: In function ‘set_default_garp_delay’:
+vrrp_if.c:475:2: warning: missing initializer for field ‘garp_interval’ of ‘garp_delay_t’ [-Wmissing-field-initializers]
+  garp_delay_t default_delay = {};
+  ^
+In file included from ../../keepalived/include/global_data.h:47:0,
+                 from vrrp_if.c:51:
+../../keepalived/include/vrrp_if.h:75:13: note: ‘garp_interval’ declared here
+  timeval_t  garp_interval;  /* Delay between sending gratuitous ARP messages on an interface */
+             ^
+  CC       vrrp_track.o
+  CC       vrrp_ipaddress.o
+vrrp_ipaddress.c: In function ‘clear_diff_static_addresses’:
+vrrp_ipaddress.c:814:2: warning: missing initializer for field ‘family’ of ‘vrrp_t’ [-Wmissing-field-initializers]
+  vrrp_t old = {};
+  ^
+In file included from ../../keepalived/include/vrrp_ipaddress.h:35:0,
+                 from vrrp_ipaddress.c:31:
+../../keepalived/include/vrrp.h:247:15: note: ‘family’ declared here
+  sa_family_t  family;   /* AF_INET|AF_INET6 */
+               ^
+vrrp_ipaddress.c:815:2: warning: missing initializer for field ‘family’ of ‘vrrp_t’ [-Wmissing-field-initializers]
+  vrrp_t new = {};
+  ^
+In file included from ../../keepalived/include/vrrp_ipaddress.h:35:0,
+                 from vrrp_ipaddress.c:31:
+../../keepalived/include/vrrp.h:247:15: note: ‘family’ declared here
+  sa_family_t  family;   /* AF_INET|AF_INET6 */
+               ^
+  CC       vrrp_ndisc.o
+  CC       vrrp_if_config.o
+  CC       vrrp_static_track.o
+  CC       vrrp_iproute.o
+  CC       vrrp_iprule.o
+  CC       vrrp_ip_rule_route_parser.o
+  CC       vrrp_vmac.o
+  CC       vrrp_ipsecah.o
+  AR       libvrrp.a
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/vrrp'
+Making all in check
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/check'
+  CC       check_daemon.o
+  CC       check_data.o
+  CC       check_parser.o
+  CC       check_api.o
+  CC       check_tcp.o
+  CC       check_http.o
+  CC       check_ssl.o
+  CC       check_genhash.o
+check_genhash.c: In function ‘genhash_usage’:
+check_genhash.c:83:3: warning: string length ‘881’ is greater than the length ‘509’ ISO C90 compilers are required to support [-Woverlength-strings]
+   "   --timeout         -t       Timeout in seconds\n");
+   ^
+  CC       check_smtp.o
+  CC       check_misc.o
+  CC       check_dns.o
+  CC       check_print.o
+  CC       ipwrapper.o
+  CC       ipvswrapper.o
+  CC       libipvs.o
+  CC       check_udp.o
+  CC       check_ping.o
+  CC       check_file.o
+  AR       libcheck.a
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/check'
+Making all in trackers
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/trackers'
+  CC       track_file.o
+  AR       libtracker.a
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/trackers'
+Making all in etc
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+Making all in init
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/init'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/init'
+Making all in init.d
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/init.d'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/init.d'
+Making all in keepalived
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/keepalived'
+  CP       keepalived.conf.sample
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/keepalived'
+Making all in sysconfig
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/sysconfig'
+  EDIT     keepalived
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/sysconfig'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived'
+  CC       main.o
+  CCLD     keepalived
+  EDIT     keepalived-non-root.service
+  EDIT     keepalived.service
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived'
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived'
+Making all in doc
+make[1]: Entering directory `/usr/src/keepalived-2.2.7/doc'
+Making all in man/man8
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/doc/man/man8'
+  EDIT     keepalived.8
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/doc/man/man8'
+Making all in man/man5
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/doc/man/man5'
+  EDIT     keepalived.conf.5
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/doc/man/man5'
+Making all in man/man1
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/doc/man/man1'
+  EDIT     genhash.1
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/doc/man/man1'
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/doc'
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/doc'
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7/doc'
+Making all in bin_install
+make[1]: Entering directory `/usr/src/keepalived-2.2.7/bin_install'
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7/bin_install'
+make[1]: Entering directory `/usr/src/keepalived-2.2.7'
+  EDIT     README
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7'
+Making install in lib
+make[1]: Entering directory `/usr/src/keepalived-2.2.7/lib'
+make  install-am
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/lib'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/lib'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/lib'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/lib'
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7/lib'
+Making install in keepalived
+make[1]: Entering directory `/usr/src/keepalived-2.2.7/keepalived'
+Making install in core
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/core'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/core'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/core'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/core'
+Making install in vrrp
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/vrrp'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/vrrp'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/vrrp'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/vrrp'
+Making install in check
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/check'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/check'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/check'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/check'
+Making install in trackers
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/trackers'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/trackers'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/trackers'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/trackers'
+Making install in etc
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+Making install in init
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/init'
+make[4]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/init'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/init'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/init'
+Making install in init.d
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/init.d'
+make[4]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/init.d'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/init.d'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/init.d'
+Making install in keepalived
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/keepalived'
+make[4]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/keepalived'
+make[4]: Nothing to be done for `install-exec-am'.
+ /bin/mkdir -p '/etc/keepalived'
+ /bin/install -c -m 644 keepalived.conf.sample '/etc/keepalived'
+make  install-data-hook
+make[5]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/keepalived'
+make[5]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/keepalived'
+make[4]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/keepalived'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/keepalived'
+Making install in sysconfig
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/sysconfig'
+make[4]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc/sysconfig'
+make[4]: Nothing to be done for `install-exec-am'.
+ /bin/mkdir -p '/etc/sysconfig'
+ /bin/install -c -m 644 keepalived '/etc/sysconfig'
+make[4]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/sysconfig'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc/sysconfig'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+make[4]: Entering directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived/etc'
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/keepalived'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/keepalived'
+ /bin/mkdir -p '/usr/local/keepalived/sbin'
+  /bin/install -c keepalived '/usr/local/keepalived/sbin'
+make  install-exec-hook
+make[4]: Entering directory `/usr/src/keepalived-2.2.7/keepalived'
+/bin/mkdir -p //usr/local/keepalived/bin
+make[4]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived'
+ /bin/mkdir -p '/usr/lib/systemd/system'
+ /bin/install -c -m 644 keepalived.service '/usr/lib/systemd/system'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived'
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7/keepalived'
+Making install in doc
+make[1]: Entering directory `/usr/src/keepalived-2.2.7/doc'
+Making install in man/man8
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/doc/man/man8'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/doc/man/man8'
+make[3]: Nothing to be done for `install-exec-am'.
+ /bin/mkdir -p '/usr/local/keepalived/share/man/man8'
+ /bin/install -c -m 644 keepalived.8 '/usr/local/keepalived/share/man/man8'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/doc/man/man8'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/doc/man/man8'
+Making install in man/man5
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/doc/man/man5'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/doc/man/man5'
+make[3]: Nothing to be done for `install-exec-am'.
+ /bin/mkdir -p '/usr/local/keepalived/share/man/man5'
+ /bin/install -c -m 644 keepalived.conf.5 '/usr/local/keepalived/share/man/man5'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/doc/man/man5'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/doc/man/man5'
+Making install in man/man1
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/doc/man/man1'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/doc/man/man1'
+make[3]: Nothing to be done for `install-exec-am'.
+ /bin/mkdir -p '/usr/local/keepalived/share/man/man1'
+ /bin/install -c -m 644 genhash.1 '/usr/local/keepalived/share/man/man1'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/doc/man/man1'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/doc/man/man1'
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/doc'
+make[3]: Entering directory `/usr/src/keepalived-2.2.7/doc'
+make[3]: Nothing to be done for `install-exec-am'.
+ /bin/mkdir -p '/usr/local/keepalived/share/snmp/mibs'
+ /bin/mkdir -p '/etc/keepalived/samples'
+ /bin/install -c -m 644 ./samples/keepalived.conf.conditional_conf ./samples/keepalived.conf.fwmark ./samples/keepalived.conf.HTTP_GET.port ./samples/keepalived.conf.inhibit ./samples/keepalived.conf.IPv6 ./samples/keepalived.conf.misc_check ./samples/keepalived.conf.misc_check_arg ./samples/keepalived.conf.PING_CHECK ./samples/keepalived.conf.quorum ./samples/keepalived.conf.sample ./samples/keepalived.conf.SMTP_CHECK ./samples/keepalived.conf.SSL_GET ./samples/keepalived.conf.status_code ./samples/keepalived.conf.track_interface ./samples/keepalived.conf.UDP_CHECK ./samples/keepalived.conf.virtualhost ./samples/keepalived.conf.virtual_server_group ./samples/keepalived.conf.vrrp ./samples/keepalived.conf.vrrp.localcheck ./samples/keepalived.conf.vrrp.lvs_syncd ./samples/keepalived.conf.vrrp.routes ./samples/keepalived.conf.vrrp.rules ./samples/keepalived.conf.vrrp.scripts ./samples/keepalived.conf.vrrp.static_ipaddress ./samples/keepalived.conf.vrrp.sync ./samples/sample.misccheck.smbcheck.sh ./samples/sample_notify_fifo.sh '/etc/keepalived/samples'
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7/doc'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/doc'
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7/doc'
+Making install in bin_install
+make[1]: Entering directory `/usr/src/keepalived-2.2.7/bin_install'
+make[2]: Entering directory `/usr/src/keepalived-2.2.7/bin_install'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7/bin_install'
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7/bin_install'
+make[1]: Entering directory `/usr/src/keepalived-2.2.7'
+make[2]: Entering directory `/usr/src/keepalived-2.2.7'
+make[2]: Nothing to be done for `install-exec-am'.
+ /bin/mkdir -p '/usr/local/keepalived/share/doc/keepalived'
+ /bin/install -c -m 644 README '/usr/local/keepalived/share/doc/keepalived'
+make  install-data-hook
+make[3]: Entering directory `/usr/src/keepalived-2.2.7'
+make[3]: Nothing to be done for `install-data-hook'.
+make[3]: Leaving directory `/usr/src/keepalived-2.2.7'
+make[2]: Leaving directory `/usr/src/keepalived-2.2.7'
+make[1]: Leaving directory `/usr/src/keepalived-2.2.7'
+Created symlink from /etc/systemd/system/multi-user.target.wants/keepalived.service to /usr/lib/systemd/system/keepalived.service.
+● keepalived.service - LVS and VRRP High Availability Monitor
+   Loaded: loaded (/usr/lib/systemd/system/keepalived.service; enabled; vendor preset: disabled)
+   Active: active (running) since Fri 2022-10-28 18:49:10 MSK; 88ms ago
+     Docs: man:keepalived(8)
+           man:keepalived.conf(5)
+           man:genhash(1)
+           https://keepalived.org
+ Main PID: 21525 (keepalived)
+   CGroup: /system.slice/keepalived.service
+           ├─21525 /usr/local/keepalived/sbin/keepalived -D
+           └─21526 /usr/local/keepalived/sbin/keepalived -D
+
+Oct 28 18:49:10 localhost.localdomain Keepalived_vrrp[21526]: Registering Kernel netlink reflector
+Oct 28 18:49:10 localhost.localdomain Keepalived_vrrp[21526]: Registering Kernel netlink command channel
+Oct 28 18:49:10 localhost.localdomain Keepalived_vrrp[21526]: (/etc/keepalived/keepalived.conf: Line 9) Truncating auth_pass to 8 characters
+Oct 28 18:49:10 localhost.localdomain Keepalived_vrrp[21526]: Assigned address 192.168.57.7 for interface enp0s8
+Oct 28 18:49:10 localhost.localdomain Keepalived_vrrp[21526]: Assigned address fe80::c0:7555:e2d2:684c for interface enp0s8
+Oct 28 18:49:10 localhost.localdomain Keepalived_vrrp[21526]: Registering gratuitous ARP shared channel
+Oct 28 18:49:10 localhost.localdomain Keepalived_vrrp[21526]: (VI_1) removing VIPs.
+Oct 28 18:49:10 localhost.localdomain Keepalived_vrrp[21526]: (VI_1) Entering BACKUP STATE (init)
+Oct 28 18:49:10 localhost.localdomain Keepalived_vrrp[21526]: VRRP sockpool: [ifindex(  3), family(IPv4), proto(112), fd(12,13) multicast, address(224.0.0.18)]
+Oct 28 18:49:10 localhost.localdomain Keepalived[21525]: Startup complete
+Keepalived v2.2.7 (01/16,2022)
+
+Copyright(C) 2001-2022 Alexandre Cassen, <acassen@gmail.com>
+
+Built with kernel headers for Linux 3.10.0
+Running on Linux 3.10.0-1160.76.1.el7.x86_64 #1 SMP Wed Aug 10 16:21:17 UTC 2022
+Distro: CentOS Linux 7 (Core)
+
+configure options: --prefix=/usr/local/keepalived --sysconf=/etc
+
+Config options:  LVS VRRP VRRP_AUTH VRRP_VMAC OLD_CHKSUM_COMPAT INIT=systemd
+
+System options:  VSYSLOG LIBNL1 RTA_ENCAP RTA_EXPIRES RTA_PREF FRA_SUPPRESS_PREFIXLEN FRA_TUN_ID RTAX_CC_ALGO RTAX_QUICKACK RTA_VIA IFA_FLAGS NET_LINUX_IF_H_COLLISION LIBIPTC_LINUX_NET_IF_H_COLLISION LIBIPVS_NETLINK IFLA_LINK_NETNSID GLOB_BRACE GLOB_ALTDIRFUNC INET6_ADDR_GEN_MODE SO_MARK
