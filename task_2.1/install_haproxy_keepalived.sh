@@ -158,7 +158,7 @@ make && make install
 touch /etc/keepalived/keepalived.conf
 
 # MASTER mode
-if [ $STATE -eq master ]; then
+if [ $STATE == master ]; then
   cat > /etc/keepalived/keepalived.conf << EOF
 vrrp_instance VI_1 {
     state MASTER
@@ -178,7 +178,7 @@ EOF
 fi
 
 # BACKUP mode
-if [ $STATE -eq backup ]; then
+if [ $STATE == backup ]; then
   cat > /etc/keepalived/keepalived.conf << EOF
 vrrp_instance VI_1 {
     state MASTER
@@ -188,7 +188,7 @@ vrrp_instance VI_1 {
     advert_int 1
     authentication {
         auth_type PASS
-        auth_pass passw123
+        auth_pass $passwd
     }
     virtual_ipaddress {
     $VIP # virtual IP
