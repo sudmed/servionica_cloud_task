@@ -5,6 +5,7 @@
 
 set -e
 passwd=$(openssl rand -base64 14)
+echo $passwd
 
 # check for root
 if [[ "$(id -u)" != "0" ]]; then
