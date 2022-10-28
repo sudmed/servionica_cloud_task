@@ -2,7 +2,7 @@
 
 # This script installs HAproxy and Keepalived (in master or backup state).
 #
-# This node IP address must be given as command-line argument `-ip` (e.g. -ip=192.168.57.6).
+# The node's IP-address must be given as command-line argument `-ip` (e.g. -ip=192.168.57.6).
 # The Keepalived state must be given as as command-line argument `-ke_st` (e.g. -ke_st=master OR -ke_st=backup).
 # The Keepalived Floating (virtual) IP must be given as command-line argument `-ke_vip` (e.g. -ke_vip=192.168.57.10).
 #
@@ -22,7 +22,8 @@ fi
 if [ $# -eq 0 ]
 then
   echo
-  echo "This script installs HAproxy and Keepalived in master or backup state."
+  echo "This script installs HAproxy and Keepalived (in master or backup state)."
+  echo "It needs 3 arguments: IP of VM, master or backup state of Keepalived and Keepalived's floating IP."
   echo
   echo "Usage: sudo ./install_haproxy_keepalived.sh -ip -ke_st -ke_vip"
   echo "Example:"
