@@ -23,7 +23,10 @@ if [ $# -eq 0 ]
 then
   echo
   echo "This script installs HAproxy and Keepalived (in master or backup state)."
-  echo "It needs 3 arguments: IP of VM, master or backup state of Keepalived and Keepalived's floating IP."
+  echo "It needs 3 mandatory arguments: "
+  echo "      1) IP-address of VM (`-ip=` option),"
+  echo "      2) master or backup state of Keepalived (`-ke_st=` option),"
+  echo "      3) Keepalived's floating IP (`-ke_vip=` option)."
   echo
   echo "Usage: sudo ./install_haproxy_keepalived.sh -ip -ke_st -ke_vip"
   echo "Example:"
