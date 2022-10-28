@@ -5,7 +5,7 @@
 ## Task solution
 
 
-### 1. Bash scripts
+### First way. Bash scripts
 1. **[Install NGINX](install_nginx.sh)**
 2. **[Install HAproxy and Keepalived](install_haproxy_keepalived.sh)**
 
