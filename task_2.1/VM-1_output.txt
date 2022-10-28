@@ -1,4 +1,4 @@
-### VM-2 OUTPUT (NGINX WEBSERVER #1)
+### VM-1 OUTPUT (NGINX WEBSERVER #1)
 
 
 $ wget -N https://raw.githubusercontent.com/sudmed/servionica_cloud_task/main/task_2.1/install_nginx.sh
