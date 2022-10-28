@@ -29,7 +29,7 @@ sudo ./install_nginx.sh -c="<H1>Hello World! <br /> Server 2</H1>"
 [#OUTPUT](VM-2_output.txt)  
 
 
-#### Validation: run HAproxy and Keepalived installing script on VM-3
+#### Validation: run HAproxy and Keepalived installing script on VM-3 (master node)
 ```console
 cd ~
 wget -N https://raw.githubusercontent.com/sudmed/servionica_cloud_task/main/task_2.1/install_haproxy_keepalived.sh
@@ -39,7 +39,7 @@ sudo ./install_haproxy_keepalived.sh -n=192.168.57.6 -s=master -v=192.168.57.10 
 [#OUTPUT](VM-3_output.txt)  
 
 
-#### Validation: run HAproxy and Keepalived installing script on VM-4
+#### Validation: run HAproxy and Keepalived installing script on VM-4 (backup node)
 ```console
 cd ~
 wget -N https://raw.githubusercontent.com/sudmed/servionica_cloud_task/main/task_2.1/install_haproxy_keepalived.sh
