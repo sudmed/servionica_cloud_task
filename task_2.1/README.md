@@ -104,10 +104,3 @@ Docker container HAPROXY:
 ![task_2.1_compose.gif](compose/task_2.1_compose.gif)
   
 </details>
-
-
-### 3. Docker swarm
-<details>
-  <summary>OPEN</summary>
-
-</details>
