@@ -17,7 +17,7 @@ yum remove docker \
     docker-latest \
     docker-latest-logrotate \
     docker-logrotate \
-    docker-engine
+    docker-engine \
     docker-ce \
     docker-ce-cli \
     containerd.io \
