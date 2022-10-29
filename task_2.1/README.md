@@ -72,7 +72,7 @@ sudo ./install_haproxy_keepalived.sh -n=192.168.57.7 -s=backup -v=192.168.57.10 
 <details>
   <summary>OPEN</summary>
 
-Infra:  
+**Infra:**  
 ```text
 Docker container NGINX-1:
     IP: 192.168.57.3
