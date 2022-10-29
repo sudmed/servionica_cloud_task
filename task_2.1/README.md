@@ -74,6 +74,8 @@ sudo ./install_haproxy_keepalived.sh -n=192.168.57.7 -s=backup -v=192.168.57.10 
 
 **Infra:**  
 ```text
+One node architecture.
+  
 Docker container NGINX-1:
     IP: 192.168.57.3
     Port HTTP: 81
