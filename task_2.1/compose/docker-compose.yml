@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  nginx-1:
+    build:
+      context: ./nginx-1
+      dockerfile: ./Dockerfile
+    restart: always
+    volumes:
+      - "./nginx-1/index.html:/usr/share/nginx/html/index.html:ro"
+    ports:
+      - 81:80
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.101
+    cap_add: 
+      - NET_ADMIN
+  
+  nginx-2:
+    build:
+      context: ./nginx-2
+      dockerfile: ./Dockerfile
+    restart: always
+    volumes:
+      - "./nginx-2/index.html:/usr/share/nginx/html/index.html:ro"
+    ports:
+      - 82:80
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.102
+    cap_add: 
+        - NET_ADMIN
+  
+  haproxy:
+    build:
+      context: ./haproxy
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - 91:80
+      - 80:80
+    volumes:
+      - "./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
+      - "./haproxy/keepalived.conf:/etc/keepalived/keepalived.conf:ro"
+    networks:
+      - static-network
+    # networks:
+    #   static-network:
+    #     ipv4_address: 172.20.128.200
+
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.20.128.0/24
