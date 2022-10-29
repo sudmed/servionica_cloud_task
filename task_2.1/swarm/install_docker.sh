@@ -10,7 +10,7 @@ if [[ "$(id -u)" != "0" ]]; then
 fi
 
 # remove old versions
-sudo yum remove docker \
+yum remove docker \
     docker-client \
     docker-client-latest \
     docker-common \
@@ -24,23 +24,24 @@ sudo yum remove docker \
     docker-compose-plugin
 
 # install prerequisties
-sudo yum install -y yum-utils \
+yum update -y
+yum install -y yum-utils \
     device-mapper-persistent-data \
     lvm2
 
 # add repo
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
 # install packets
-sudo yum install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+yum install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # enable & start docker
-sudo systemctl start docker
-sudo systemctl enable docker
+systemctl start docker
+systemctl enable docker
 
 # check version
 docker --version
 docker compose version
 
 # add user in docker group
-sudo usermod -aG docker user
+usermod -aG docker user
