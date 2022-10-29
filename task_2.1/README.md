@@ -12,7 +12,10 @@
 - Keepalived floating (virtual) IP: 192.168.57.10  
 
 
-# First way: Bash scripts
+### First way: Bash scripts
+<details>
+  <summary>OPEN</summary>
+
 1. **[Install NGINX](install_nginx.sh)**
 2. **[Install HAproxy and Keepalived](install_haproxy_keepalived.sh)**
 
@@ -62,3 +65,6 @@ sudo chmod +x install_haproxy_keepalived.sh
 sudo ./install_haproxy_keepalived.sh -n=192.168.57.7 -s=backup -v=192.168.57.10 -w1=192.168.57.4 -w2=192.168.57.5 -p="eyhZK+8TmdkWLH+SXuQ="
 ```
 [STDOUT](VM-4_output.txt)  
+</details>
+
+### Second way: docker compose
