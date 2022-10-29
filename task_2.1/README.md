@@ -4,7 +4,7 @@
 
 ### Task solution
 
-### First way: Bash scripts
+### 1. Bash scripts
 <details>
   <summary>OPEN</summary>
 
@@ -68,14 +68,14 @@ sudo ./install_haproxy_keepalived.sh -n=192.168.57.7 -s=backup -v=192.168.57.10 
 [STDOUT](VM-4_output.txt)  
 </details>
 
-### Second way: Docker compose
+### 2. Docker compose
 <details>
   <summary>OPEN</summary>
 
 </details>
 
 
-### Third way: Docker swarm
+### 3. Docker swarm
 <details>
   <summary>OPEN</summary>
 
