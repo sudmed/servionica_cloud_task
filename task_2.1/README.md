@@ -72,8 +72,29 @@ sudo ./install_haproxy_keepalived.sh -n=192.168.57.7 -s=backup -v=192.168.57.10 
 <details>
   <summary>OPEN</summary>
 
-  
-Files:  
+Infra:  
+```text
+Docker container NGINX-1:
+    IP: 192.168.57.3
+    Port HTTP: 81
+    Instances:
+        - nginx #1
+
+Docker container NGINX-2:
+    IP: 192.168.57.3
+    Port HTTP: 82
+    Instances:
+        - nginx #2
+
+Docker container HAPROXY:
+    IP: 192.168.57.3
+    Port HTTP: 91
+    Instances:
+        - haproxy
+        - keepalived
+```
+
+  **Files:**  
 1. **[docker-compose.yml](compose/docker-compose.yml)**  
 2. **[additional files](compose/)**
 
