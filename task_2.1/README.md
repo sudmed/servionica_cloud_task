@@ -72,8 +72,8 @@ sudo ./install_haproxy_keepalived.sh -n=192.168.57.7 -s=backup -v=192.168.57.10 
 <details>
   <summary>OPEN</summary>
 
-
-Scripts:  
+  
+Files:  
 1. **[docker-compose.yml](compose/docker-compose.yml)**  
 2. **[additional files](compose/)**
 
