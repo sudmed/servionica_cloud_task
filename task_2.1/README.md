@@ -72,6 +72,9 @@ sudo ./install_haproxy_keepalived.sh -n=192.168.57.7 -s=backup -v=192.168.57.10 
 <details>
   <summary>OPEN</summary>
 
+### Validation of working balancer:
+![task_2.1_compose.gif](compose/task_2.1_compose.gif)
+  
 </details>
 
 
