@@ -6,9 +6,66 @@
 ### Task solution
 
 ### Ansible role
+```console
+.
+├── ansible.cfg
+├── group_vars
+│   ├── all
+│   │   └── vars
+│   ├── loadbalancers
+│   └── webservers
+├── hosts
+├── host_vars
+│   ├── ha1
+│   ├── ha2
+│   ├── web1
+│   └── web2
+├── infra.txt
+├── nginx_haproxy_ha.yml
+├── roles
+│   ├── ansible-ssh-copy-id
+│   │   ├── README.md
+│   │   ├── tasks
+│   │   │   └── main.yml
+│   │   └── vars
+│   │       └── main.yml
+│   ├── ha-proxy
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   ├── README.md
+│   │   ├── tasks
+│   │   │   └── main.yml
+│   │   └── templates
+│   │       └── haproxy.cfg.j2
+│   ├── keepalived
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   ├── README.md
+│   │   ├── tasks
+│   │   │   └── main.yml
+│   │   ├── templates
+│   │   │   └── keepalived.conf.j2
+│   │   └── vars
+│   │       └── main.yml
+│   └── nginx
+│       ├── handlers
+│       │   └── main.yml
+│       ├── README.md
+│       ├── tasks
+│       │   └── main.yml
+│       ├── templates
+│       │   ├── index.html.j2
+│       │   └── nginx.conf.j2
+│       └── vars
+│           └── main.yml
+└── tmux.sh
+```
+
+
 <details>
   <summary>OPEN</summary>
 
+**Infrastructure details**
 - VM-1 (192.168.57.4): NGINX webserver # 1  
 - VM-2 (192.168.57.5): NGINX webserver # 2  
 - VM-3 (192.168.57.6): HAproxy and Keepalived server # 1 (master node)  
