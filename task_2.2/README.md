@@ -5,9 +5,9 @@
 
 ### Task solution
 
-### Ansible role
+### Ansible role structure
 ```console
-.
+ansible
 ├── ansible.cfg
 ├── group_vars
 │   ├── all
