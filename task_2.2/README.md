@@ -80,7 +80,7 @@ ansible
 </details>
   
 
-### Validation of running role with simple monitoring
+### Validation of running role and simple monitoring with `watch` command
 <details>
   <summary>OPEN</summary>
 
