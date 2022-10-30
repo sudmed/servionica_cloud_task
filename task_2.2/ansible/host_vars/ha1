@@ -1,0 +1,2 @@
+host_vars_keepalived_status     : MASTER
+host_vars_keepalived_priority   : 101

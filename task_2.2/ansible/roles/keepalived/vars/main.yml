@@ -1,0 +1,7 @@
+---
+# vars file for keepalived
+
+auth_pass                           : "eyhZK8TmdkWLH+SXuQ"
+virtual_ipaddress                   : 192.168.57.10
+# host_vars_keepalived_status       : MASTER or BACKUP  # stored in host_vars
+# host_vars_keepalived_priority     : 100 or 101        # stored in host_vars

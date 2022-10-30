@@ -1,0 +1,53 @@
+---
+# tasks file for ha-proxy
+
+- name: Install EPEL repo
+  yum:
+    name: epel-release
+    state: present
+
+- name: Install HAProxy
+  yum:
+    name: haproxy
+    state: present
+    update_cache: yes
+
+- name: Start and enable haproxy
+  service:
+    name: haproxy
+    state: started
+    enabled: true
+
+- name: Copy config file from j2-template
+  template: 
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    owner: root
+    group: root
+    mode:  0644
+  notify: Restart HAProxy
+
+- name: Add user haproxy
+  user:
+    name: haproxy
+    system: yes
+    comment: managed by Ansible
+    state: present
+
+- name: Allow access to http port
+  firewalld:
+    service: http
+    zone: public
+    permanent: yes
+    immediate: yes
+    state: enabled
+  notify: Reload firewalld
+
+- name: Allow access to 8181 port
+  firewalld:
+    port: 8181/tcp
+    zone: public
+    permanent: yes
+    immediate: yes
+    state: enabled
+  notify: Reload firewalld

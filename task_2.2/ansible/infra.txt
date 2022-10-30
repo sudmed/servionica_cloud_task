@@ -1,0 +1,12 @@
+
+
+Describing of infrastructure:
+
+192.168.57.4    - webserver1
+192.168.57.5    - webserver2
+
+192.168.57.6    - ha-proxy1             => watch -n0.1 curl http://192.168.57.6
+192.168.57.7    - ha-proxy2             => watch -n0.1 curl http://192.168.57.7
+192.168.57.10   - "float" IP            => watch -n0.1 curl http://192.168.57.10
+
+

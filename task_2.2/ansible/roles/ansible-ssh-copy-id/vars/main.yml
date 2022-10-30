@@ -1,0 +1,5 @@
+---
+# defaults vars for ansible-ssh-copy-id
+
+ssh_user: root
+ssh_public_key: /home/user/.ssh/id_ed25519.pub

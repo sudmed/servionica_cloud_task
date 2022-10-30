@@ -1,0 +1,30 @@
+---
+# This playbook installs HAProxy with Keepalived as a Load Balancer for Nginx.
+
+- name: Prepare hosts
+  hosts: all
+  gather_facts: no
+  become: yes
+  roles:
+    - { role: ansible-ssh-copy-id, tags: prepare }
+
+- name: NGINX
+  hosts: webservers
+  gather_facts: yes
+  become: yes
+  roles:
+    - { role: nginx, tags: nginx }
+
+- name: HAProxy
+  hosts: loadbalancers
+  gather_facts: yes
+  become: yes
+  roles:
+    - { role: ha-proxy, tags: ha-proxy }
+
+- name: Keepalived
+  hosts: loadbalancers
+  gather_facts: no
+  become: yes
+  roles:
+    - { role: keepalived, tags: keepalived }

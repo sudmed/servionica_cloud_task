@@ -1,0 +1,14 @@
+---
+# vars file for nginx
+
+nginx_user                  : nginx
+worker_processes            : auto
+client_max_body_size        : 512M
+document_root               : /usr/share/nginx/html
+worker_connections          : 2048
+#server_name                : "{{ ansible_host }}"
+server_name                 : "_"
+listen_port                 : 80
+keepalive_timeout           : 65
+types_hash_max_size         : 4096
+# host_vars_webserver_text  : 1 or 2 # stored in host_vars

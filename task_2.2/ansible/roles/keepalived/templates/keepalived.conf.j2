@@ -1,0 +1,16 @@
+# Keepalived config
+
+vrrp_instance VI_1 {
+    state {{ host_vars_keepalived_status }}
+    interface enp0s8 # ip a
+    virtual_router_id 51
+    priority {{ host_vars_keepalived_priority }} # 101 master; 100 slave
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass {{ auth_pass }}
+    }
+    virtual_ipaddress {
+    {{ virtual_ipaddress }} # float IP
+    }
+}

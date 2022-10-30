@@ -1,0 +1,12 @@
+---
+# handlers file for ha-proxy
+
+- name: Restart HAProxy
+  service:
+    name: haproxy
+    state: restarted
+
+- name: Reload firewalld
+  systemd:
+    name: firewalld
+    state: reloaded
