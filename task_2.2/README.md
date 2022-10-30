@@ -16,12 +16,12 @@
 - Keepalived floating (virtual) IP: 192.168.57.10  
 
   
-### Validation of working balancer and keepalived router failover:
+### Validation of running role with simple monitoring:
 ![task_2.1.gif](nginx_haproxy_ha.gif)
 
 ---
 
-#### Play Ansible playbook
+#### Run Ansible playbook
 ```console
 ansible-playbook nginx_haproxy_ha.yml -i ./hosts -K
 ```
