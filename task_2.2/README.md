@@ -5,7 +5,10 @@
 
 ### Task solution
 
-### Ansible role structure
+### Ansible files tree
+<details>
+  <summary>OPEN</summary>
+
 ```console
 ansible
 ├── ansible.cfg
@@ -61,20 +64,29 @@ ansible
 └── tmux.sh
 ```
 
+</details>
 
+### Infrastructure details
 <details>
   <summary>OPEN</summary>
 
-**Infrastructure details**
+**4 VM boxes with CentOS**
 - VM-1 (192.168.57.4): NGINX webserver # 1  
 - VM-2 (192.168.57.5): NGINX webserver # 2  
 - VM-3 (192.168.57.6): HAproxy and Keepalived server # 1 (master node)  
 - VM-4 (192.168.57.7): HAproxy and Keepalived server # 2 (backup node)  
 - Keepalived floating (virtual) IP: 192.168.57.10  
 
+</details>
   
-### Validation of running role with simple monitoring:
+
+### Validation of running role with simple monitoring
+<details>
+  <summary>OPEN</summary>
+
 ![task_2.1.gif](nginx_haproxy_ha.gif)
+
+</details>
 
 ---
 
