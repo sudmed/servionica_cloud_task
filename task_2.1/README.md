@@ -30,7 +30,7 @@
 cd ~
 wget -N https://raw.githubusercontent.com/sudmed/servionica_cloud_task/main/task_2.1/install_haproxy_keepalived.sh
 sudo chmod +x install_haproxy_keepalived.sh
-sudo ./install_nginx.sh -c="<H1>Hello World! <br /> Server 1</H1>"
+sudo ./install_haproxy_keepalived.sh -c="<H1>Hello World! <br /> Server 1</H1>"
 ```
 [STDOUT](VM-1_output.txt)  
 
@@ -41,7 +41,7 @@ sudo ./install_nginx.sh -c="<H1>Hello World! <br /> Server 1</H1>"
 cd ~
 wget -N https://raw.githubusercontent.com/sudmed/servionica_cloud_task/main/task_2.1/install_haproxy_keepalived.sh
 sudo chmod +x install_haproxy_keepalived.sh
-sudo ./install_nginx.sh -c="<H1>Hello World! <br /> Server 2</H1>"
+sudo ./install_haproxy_keepalived.sh -c="<H1>Hello World! <br /> Server 2</H1>"
 ```
 [STDOUT](VM-2_output.txt)  
 
