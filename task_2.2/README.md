@@ -88,9 +88,12 @@ ansible
 
 </details>
 
----
 
-#### Run Ansible playbook
+
+### Run Ansible playbook and its output
+<details>
+  <summary>OPEN</summary>
+
 ```console
 ansible-playbook nginx_haproxy_ha.yml -i ./hosts -K
 ```
