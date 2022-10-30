@@ -94,6 +94,7 @@ ansible
 <details>
   <summary>OPEN</summary>
 
+Command for run playbook
 ```console
 ansible-playbook nginx_haproxy_ha.yml -i ./hosts -K
 ```
